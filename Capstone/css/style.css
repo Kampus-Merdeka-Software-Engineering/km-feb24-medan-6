@@ -1,0 +1,80 @@
+.navbar {
+    height: 200px;
+    background-color: rgb(48, 48, 242);
+}
+
+.nav-title-container {
+    height: 50%;
+    display: flex;
+}
+
+.nav-option-container {
+    height: 50%;
+    display: flex;
+}
+
+.nav-logo {
+    background-color: azure;
+    width: 10%;
+}
+
+.nav-title {
+    background-color: rgb(34, 34, 131);
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.nav-tim {
+    background-color: rgb(47, 47, 171);
+    width: 10%;
+}
+
+.nav-total {
+    background-color: rgb(232, 143, 232);
+    width: 50%;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgb(50, 51, 135);
+    width: 50%;
+    display: flex;
+}
+
+
+.nav-dropdown {
+    background-color: cornflowerblue;
+    width: 50%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.total-item {
+    width: 20%;
+    height: 50%;
+    background-color: rgb(191, 187, 187);
+    text-align: center;
+
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 10px;
+  background-color: rgb(212, 209, 209);
+}
+
+.grid-item {
+  border: 1px solid #000;
+  padding: 30px;
+  text-align: center;
+  background-color: rgb(34, 34, 131);
+}
+.item1 { grid-column: 1 / -1; }
+.item5 { grid-column: 1 / -2; }
+
+
+
+
