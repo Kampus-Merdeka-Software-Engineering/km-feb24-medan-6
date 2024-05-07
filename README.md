@@ -5,20 +5,20 @@
 
 <br>
 
-| Name                            | Section     | Team        | 
-| -----------------------------   | ----------- | ----------- |
-| Anggi Putri Nur Aulia           | Medan       | 6           |
-| Siti Nur Latifah                | Medan       | 6           |
-| Vania Shira Marella             | Medan       | 6           |
-| Tri Alfianto                    | Medan       | 6           |
-| Salman                          | Medan       | 6           |
-| Nurul Aini Lessy                | Medan       | 6           |
-| Muhamad Thirafi Qaedi Setiawan  | Medan       | 6           |
-| Azhifa Aisyasalbil              | Medan       | 6           |
-| Yuni Rahmawati                  | Medan       | 6           |
-| Akbar Pratama                   | Medan       | 6           |
-| Teguh Setiadi                   | Medan       | 6           |
-| Dionisia Destikarniaman Gulo    | Medan       | 6           |
-| Roy Afrizon Asril               | Medan       | 6           |
+| Name                            | Section     | Team        | Role                      |
+| -----------------------------   | ----------- | ----------- | --------------------------|
+| Siti Nur Latifah                | Medan       | 6           | Team Captain              |
+| Anggi Putri Nur Aulia           | Medan       | 6           | Quality Assurance         |
+| Vania Shira Marella             | Medan       | 6           | ⁠Pitch Deck Team           |
+| Tri Alfianto                    | Medan       | 6           | Front End Engineer        |
+| Salman                          | Medan       | 6           | Quality Assurance         |
+| Nurul Aini Lessy                | Medan       | 6           | ⁠Deployment Team           |
+| Muhamad Thirafi Qaedi Setiawan  | Medan       | 6           | Front End Engineer        |
+| Azhifa Aisyasalbil              | Medan       | 6           | ⁠Pitch Deck Team           |
+| Yuni Rahmawati                  | Medan       | 6           | ⁠Pitch Deck Team           |
+| Akbar Pratama                   | Medan       | 6           | Front End Engineer        |
+| Teguh Setiadi                   | Medan       | 6           | Front End Engineer        |
+| Dionisia Destikarniaman Gulo    | Medan       | 6           | Front End Engineer        |
+| Roy Afrizon Asril               | Medan       | 6           | Deployment Team           |
 
 <br>
