@@ -11,19 +11,19 @@
     <nav class="navbar">
         <div class="nav-title-container">
             <div class="nav-logo">
-                logo
+                <img src="logorevoU.png" alt="" title="kuda poni" width="200">
             </div>
             <div class="nav-title">
                 <h1>Bike Sales in Europa Dashboard</h1>
             </div>
             <div class="nav-tim">
-                nama tim
+                <p>Team 6-Medan</p>
             </div>
         </div>
         <div class="nav-option-container">
             <div class="nav-total">
                 <div class="total-item">
-                <p>total profit</p>
+                <p>Total profit</p>
                 </div>
                 <div class="total-item">
                 <p>Order_Quantity</p>
@@ -56,16 +56,57 @@
                 </div>
     </nav>
     <div class="grid-container">
-        <div class="grid-item item1">Total profit in Europa</div>
-        <div class="grid-item">total in profit by age group</div>
-        <div class="grid-item">total in profit by customer_gender</div>  
-        <div class="grid-item">total in profit by product_category</div>
-        <div class="grid-item item5">total profit Q3 & Q4 in france</div>
-        <div class="grid-item">total profit Q3 & Q4 in france by sub category</div>
-        <div class="grid-item">profit age group by product category</div>
-        <div class="grid-item">total profit by product category in france</div>  
-        <div class="grid-item">profit customer gender by product category</div>
+        <div class="grid-item col-6">
+            <p>Total profit in Europa</p>
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="grid-item col-2 col-s-6">
+        <p>Total in profit by age group</p></div>
+        <div class="grid-item col-2 col-s-6">
+            <p>Total in profit by customer_gender</p> </div>  
+        <div class="grid-item col-2 col-s-6">
+            <p>Total in profit by product_category</p></div>
+        <div class="grid-item col-3 col-s-6">
+            <p>Total profit Q3 & Q4 in france </p></div>
+        <div class="grid-item col-3 col-s-6">
+            <p>Total profit Q3 & Q4 in france by sub category</p></div>
+        <div class="grid-item col-2 col-s-6">
+            <p>Profit age group by product category</p></div>
+        <div class="grid-item col-2 col-s-6">
+            <p>Total profit by product category in france</p></div>  
+        <div class="grid-item col-2 col-s-6">
+            <p>Profit customer gender by product category</p></div>
+      </div> 
       </div>
+
+
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['United States', 'Australia', 'United Kingdom', 'Canada', 'germany', 'France'],
+            datasets: [{
+              label: '# Profit',
+              data: [6187169, 3991425, 2402989, 2167470, 2058238, 2045254],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+
+      
     </body>
 
 </body>
