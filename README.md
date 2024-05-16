@@ -8,17 +8,18 @@
 | Name                            | Section     | Team        | Role                      |
 | -----------------------------   | ----------- | ----------- | --------------------------|
 | Siti Nur Latifah                | Medan       | 6           | Team Captain              |
+| Akbar Pratama                   | Medan       | 6           | Front End Engineer        |
+| Dionisia Destikarniaman Gulo    | Medan       | 6           | Front End Engineer        |
+| Muhamad Thirafi Qaedi Setiawan  | Medan       | 6           | Front End Engineer        |
+| Teguh Setiadi                   | Medan       | 6           | Front End Engineer        |
+| Tri Alfianto                    | Medan       | 6           | Front End Engineer        |
+| Nurul Aini Lessy                | Medan       | 6           | ⁠Deployment Team           |
+| Roy Afrizon Asril               | Medan       | 6           | Deployment Team           |
+| Salman                          | Medan       | 6           | Quality Assurance         |
 | Anggi Putri Nur Aulia           | Medan       | 6           | Quality Assurance         |
 | Vania Shira Marella             | Medan       | 6           | ⁠Pitch Deck Team           |
-| Tri Alfianto                    | Medan       | 6           | Front End Engineer        |
-| Salman                          | Medan       | 6           | Quality Assurance         |
-| Nurul Aini Lessy                | Medan       | 6           | ⁠Deployment Team           |
-| Muhamad Thirafi Qaedi Setiawan  | Medan       | 6           | Front End Engineer        |
 | Azhifa Aisyasalbil              | Medan       | 6           | ⁠Pitch Deck Team           |
 | Yuni Rahmawati                  | Medan       | 6           | ⁠Pitch Deck Team           |
-| Akbar Pratama                   | Medan       | 6           | Front End Engineer        |
-| Teguh Setiadi                   | Medan       | 6           | Front End Engineer        |
-| Dionisia Destikarniaman Gulo    | Medan       | 6           | Front End Engineer        |
-| Roy Afrizon Asril               | Medan       | 6           | Deployment Team           |
+
 
 <br>

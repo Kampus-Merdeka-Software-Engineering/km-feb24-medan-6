@@ -1,80 +1,160 @@
+/*  */
+
+/* Gaya dasar untuk navbar */
 .navbar {
-    height: 200px;
-    background-color: rgb(48, 48, 242);
-}
-
-.nav-title-container {
-    height: 50%;
+    background-color: #15417a;
     display: flex;
+    flex-direction: column;
+    padding: 10px;
 }
 
-.nav-option-container {
-    height: 50%;
+/* Mengatur kontainer judul dan opsi */
+.nav-title-container, .nav-option-container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
+/* Mengatur logo, judul, dan tim */
+.nav-tim {
+    flex: 1;
+    color: white;
+    text-align: right;
+    align-self: flex-start;
+    padding: 5px;
+    justify-content: flex-start;
+}
 .nav-logo {
-    background-color: azure;
-    width: 10%;
+    flex: 1;
+    text-align: left;
+    align-self: flex-start;
+    padding: 5px;
+    justify-content: flex-start;
 }
 
 .nav-title {
-    background-color: rgb(34, 34, 131);
-    width: 80%;
-    align-items: center;
-    justify-content: center;
-    display: flex;
+    color: white;
+    /* background-color: #abb2bc; */
+    font-size: large;
+    flex: 1;
+    text-align: center;
+    padding: 5px;
 }
 
-.nav-tim {
-    background-color: rgb(47, 47, 171);
-    width: 10%;
-}
-
+/* Mengatur total dan dropdown */
 .nav-total {
-    background-color: rgb(232, 143, 232);
-    width: 50%;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: rgb(50, 51, 135);
+    background-color: #15417a;
+    flex: 1;
     width: 50%;
     display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 
 .nav-dropdown {
-    background-color: cornflowerblue;
-    width: 50%;
-    text-align: center;
-    padding-top: 20px;
+    /* background-color: rgb(149, 149, 175); */
+    flex: 1;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .total-item {
-    width: 20%;
-    height: 50%;
-    background-color: rgb(191, 187, 187);
+    flex: 1;
+    background-color: rgb(212, 209, 209);
     text-align: center;
-
+    border: 1px solid #15417a;
+    margin: 20px;
 }
 
+/* Media query untuk layar tablet */
+@media (max-width: 768px) {
+    .nav-title-container, .nav-option-container {
+        flex-direction: column;
+    }
+
+    .nav-logo, .nav-title, .nav-tim, .nav-total, .nav-dropdown {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Media query untuk layar mobile */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 5px;
+    }
+
+    .nav-title h1 {
+        font-size: 1.5em; /* Menyesuaikan ukuran font judul */
+    }
+
+    .dropdown-content {
+        flex-direction: column;
+    }
+
+    .nav-total{
+        flex-direction: column;
+    }
+
+}
 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   padding: 10px;
+  grid-template-columns: repeat(6, 1fr);
   background-color: rgb(212, 209, 209);
+  height: 70vh;
 }
 
 .grid-item {
-  border: 1px solid #000;
-  padding: 30px;
+  color: black;
+  border: 1px solid #15417a;
   text-align: center;
-  background-color: rgb(34, 34, 131);
+  background-color: rgb(217, 214, 214)
 }
-.item1 { grid-column: 1 / -1; }
-.item5 { grid-column: 1 / -2; }
 
 
+.col-6 {
+    grid-column: auto / span 6;
+
+}
+
+.col-6 p {
+    background-color: #15417a;
+    margin-top: auto;
+    color: white;
+}
+
+.col-3 {
+    grid-column: auto / span 3;
+}
+
+.col-3 p {
+    background-color: #15417a;
+    margin-top: auto;
+    color: white;
+}
+
+.col-2 {
+    grid-column: auto / span 2;
+}
+
+.col-2 p {
+    background-color: #15417a;
+    margin-top: auto;
+    color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    .col-s-6 {
+        grid-column: auto / span 6;
+    }
+}
 
 
