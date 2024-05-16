@@ -1,4 +1,14 @@
-<h1 align="center">SE Capstone Project RevoU KM</h1>
+<br />
+<p align="center">
+  <a href="https://github.com/Kampus-Merdeka-Software-Engineering/km-feb24-medan-6">
+    <img src="Capstone/logorevoU.png" width='250dp' alt="Logo" >
+  </a>
+
+  <h1 align="center">SE Capstone Project RevoU KM</h1>
+  <h2 align="center">
+  RevoU Tech Academy - Learn Data Analytics & Software Development With AI Capstone Project worked by our team.</h2> 
+</p>
+<br>
 # Team Members
 
 ## Team  : Medan Team 6
