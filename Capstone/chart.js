@@ -79,21 +79,3 @@ new Chart(tpgc, {
   }
 });
 
-new Chart(tppcc, {
-  type: 'bar',
-  data: {
-    labels: ['United States', 'Australia', 'United Kingdom'],
-    datasets: [{
-      label: 'Profit',
-      data: [6187169, 3991425, 2402989],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
