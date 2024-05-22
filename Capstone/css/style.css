@@ -1,11 +1,4 @@
-<<<<<<< chart
 /*  */
-=======
-.navbar {
-    height: 200px;
-    background-color: rgb(67, 242, 48);
-}
->>>>>>> develop
 
 /* Gaya dasar untuk navbar */
 .navbar {
@@ -41,25 +34,12 @@
 }
 
 .nav-title {
-<<<<<<< chart
     color: white;
     /* background-color: #abb2bc; */
     font-size: large;
     flex: 1;
     text-align: center;
     padding: 5px;
-=======
-    background-color: rgb(34, 34, 131);
-    width: 80%;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
-
-.nav-tim {
-    background-color: rgb(34, 34, 131);
-    width: 10%;
->>>>>>> develop
 }
 
 /* Mengatur total dan dropdown */

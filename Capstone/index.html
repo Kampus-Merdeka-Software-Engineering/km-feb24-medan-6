@@ -36,7 +36,7 @@
             <div class="dropdown-content">
                     <div>
                     <label for="Month">Month</label>
-                    <select name="Month" id="Month">
+                    <select onchange="handleOnChangeMonth(this)" name="Month" id="Month">
                     <option value="December">December</option>
                     <option value="November">November</option>
                     <option value="October">October</option>
@@ -58,18 +58,28 @@
     <div class="grid-container">
         <div class="grid-item col-6">
             <p>Total profit in Europa</p>
-            <canvas id="myChart"></canvas>
+            <canvas id="TotalProfitChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-        <p>Total in profit by age group</p></div>
+        <p>Total in profit by age group</p>
+        <canvas id="TotalProfitAgeChart"></canvas>
+        </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by customer_gender</p> </div>  
+            <p>Total in profit by customer_gender</p> 
+            <canvas id="TotalProfitGenderChart"></canvas>
+        </div>  
         <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by product_category</p></div>
+            <p>Total in profit by product_category</p>
+            <canvas id="TotalProfitPCategoryChart"></canvas>
+        </div>
         <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france </p></div>
+            <p>Total profit Q3 & Q4 in france </p>
+            <canvas id="TotalProfitChart"></canvas>
+        </div>
         <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france by sub category</p></div>
+            <p>Total profit Q3 & Q4 in france by sub category</p>
+            <canvas id="TotalProfitChart"></canvas>
+        </div>
         <div class="grid-item col-2 col-s-6">
             <p>Profit age group by product category</p></div>
         <div class="grid-item col-2 col-s-6">
@@ -82,29 +92,8 @@
 
       
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script>
-        const ctx = document.getElementById('myChart');
-      
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['United States', 'Australia', 'United Kingdom', 'Canada', 'germany', 'France'],
-            datasets: [{
-              label: '# Profit',
-              data: [6187169, 3991425, 2402989, 2167470, 2058238, 2045254],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            indexAxis: 'y',
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-      </script>
+      <script src="chart.js"></script>
+    
 
       
     </body>
