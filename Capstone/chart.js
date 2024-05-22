@@ -1,5 +1,5 @@
 function loadJson(){
-    fetch("csvjson.json")
+    fetch("ineuropa.json")
                 .then((res) => {
                    return res.json();
                 })
@@ -9,6 +9,25 @@ function loadJson(){
                        console.error("Unable to fetch data:", error));
 }
 loadJson()
+
+function handleOnChangeMonth(element){
+    let month = element.value
+
+}
+
+function loadJson(){
+    fetch("infrance.json")
+                .then((res) => {
+                   return res.json();
+                })
+                .then((data) => 
+                      console.log(data))
+                .catch((error) => 
+                       console.error("Unable to fetch data:", error));
+}
+loadJson()
+
+
 
 function handleOnChangeMonth(element){
     let month = element.value
