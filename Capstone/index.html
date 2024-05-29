@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Bike Sales</title>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-title-container">
             <div class="nav-logo">
-                <img src="logorevoU.png" alt="" title="kuda poni" width="200">
+                <img src="logorevoU.png" alt="" title="logorevoU" width="200">
             </div>
             <div class="nav-title">
                 <h1>Bike Sales in Europa Dashboard</h1>
@@ -61,53 +61,41 @@
             <canvas id="myChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-        <p>Total in profit by age group</p></div>
+        <p>Total in profit by age group</p>
+        <canvas id="age"></canvas>
+    </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by customer_gender</p> </div>  
+            <p>Total in profit by customer_gender</p>
+            <canvas id="customer_gender"></canvas>
+         </div>  
         <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by product_category</p></div>
+            <p>Total in profit by product_category</p>
+            <canvas id="product_category"></canvas>
+        </div>
         <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france </p></div>
+            <p>Total profit Q3 & Q4 in france </p>
+            <canvas id="total_profit"></canvas>
+        </div>
         <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france by sub category</p></div>
+            <p>Total profit Q3 & Q4 in france by sub category</p>
+            <canvas id="sub_category"></canvas>
+        </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Profit age group by product category</p></div>
+            <p>Profit age group by product category</p>
+            <canvas id="agegrup_infrance"></canvas>
+        </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Total profit by product category in france</p></div>  
+            <p>Total profit by product category in france</p>
+            <canvas id="productcategory_infrance"></canvas>
+        </div>  
         <div class="grid-item col-2 col-s-6">
-            <p>Profit customer gender by product category</p></div>
+            <p>Profit customer gender by product category</p>
+            <canvas id="customergender_infrance"></canvas>
+        </div>
       </div> 
       </div>
 
-
-      
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script>
-        const ctx = document.getElementById('myChart');
-      
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['United States', 'Australia', 'United Kingdom', 'Canada', 'germany', 'France'],
-            datasets: [{
-              label: '# Profit',
-              data: [6187169, 3991425, 2402989, 2167470, 2058238, 2045254],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            indexAxis: 'y',
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-      </script>
-
-      
-    </body>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/chart.js"></script>
 </body>
 </html>
