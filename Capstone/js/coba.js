@@ -1,4 +1,3 @@
-
 async function loadJson() {
   try {
     const response = await fetch("data_france.json");
