@@ -23,17 +23,20 @@
         <div class="nav-option-container">
             <div class="nav-total">
                 <div class="total-item">
-                <p>Total profit</p>
+                <h5>Total profit</h5>
+                <p>18,85 M €</p>
                 </div>
                 <div class="total-item">
-                <p>Order_Quantity</p>
+                <h5>Order_Quantity</h5>
+                <p>1.29 M €</p>
                 </div>
                 <div class="total-item">
-                <p>Profit lowest country</p>
+                <h5>Profit lowest country</h5>
+                <p>2,05 M €</p>
                 </div>
             </div>
             <div class="nav-dropdown">
-            <div class="dropdown-content">
+                <!-- <div class="dropdown-content">
                     <div>
                     <label for="Month">Month</label>
                     <select onchange="handleOnChangeMonth(this)" name="Month" id="Month">
@@ -53,16 +56,60 @@
                     <option value="2017">2017</option>
                     </select>
                     </div>
-                </div>
+                </div> -->
+                <div class="filterdrop">
+                    <button id="toggleDropdownbulan">Pilih Bulan</button>
+                    <div id="dropdownbulan" style="display: none">
+                      <label
+                        ><input type="checkbox" name="bulan" value="7" /> Juli
+                        <span>203,3rb</span></label><br />
+                      <label
+                        ><input type="checkbox" name="bulan" value="8" /> Agustus
+                        <span>203,3rb</span></label><br />
+                      <label
+                        ><input type="checkbox" name="bulan" value="9" /> September
+                        <span>203,3rb</span></label><br />
+                      <label
+                        ><input type="checkbox" name="bulan" value="10" /> Oktober
+                        <span>203,3rb</span></label><br />
+                      <label
+                        ><input type="checkbox" name="bulan" value="11" /> November
+                        <span>203,3rb</span></label><br />
+                      <label
+                        ><input type="checkbox" name="bulan" value="12" /> Desember
+                        <span>203,3rb</span></label><br />
+                      <!-- Tambahkan opsi lain di sini sesuai kebutuhan -->
+                    </div>
+                    <button id="toggleDropdowntahun">Pilih Tahun</button>
+                    <div id="dropdowntahun" style="display: none">
+                      <label
+                        ><input type="checkbox" name="bulan" value="1" /> 2015
+                        <span>203,3rb</span></label
+                      ><br />
+                      <label
+                        ><input type="checkbox" name="bulan" value="2" /> 2016
+                        <span>203,3rb</span></label
+                      ><br />
+                      <label
+                        ><input type="checkbox" name="bulan" value="3" /> 2017
+                        <span>203,3rb</span></label
+                      ><br />
+                      <label
+                        ><input type="checkbox" name="bulan" value="4" /> 2018
+                        <span>203,3rb</span>
+                      </label>
+                    </div>
+                  </div>
+            
     </nav>
     <div class="grid-container">
         <div class="grid-item col-6">
             <p>Total profit in Europa</p>
-            <canvas id="TotalProfitChart"></canvas>
+            <canvas id="myChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
         <p>Total in profit by age group</p>
-        <canvas id="TotalProfitAgeChart"></canvas>
+        <canvas id="age-Chart-eropa"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
             <p>Total in profit by customer_gender</p> 
@@ -70,22 +117,28 @@
         </div>  
         <div class="grid-item col-2 col-s-6">
             <p>Total in profit by product_category</p>
-            <canvas id="TotalProfitPCategoryChart"></canvas>
+            <canvas id="category-chart-eropa"></canvas>
         </div>
         <div class="grid-item col-3 col-s-6">
             <p>Total profit Q3 & Q4 in france </p>
-            <canvas id="TotalProfitChart"></canvas>
+            <canvas id="salesChart"></canvas>
         </div>
         <div class="grid-item col-3 col-s-6">
             <p>Total profit Q3 & Q4 in france by sub category</p>
-            <canvas id="TotalProfitChart"></canvas>
+            <canvas id="productSalesChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Profit age group by product category</p></div>
+            <p>Profit age group by product category</p>
+            <canvas id=""></canvas>
+          </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Total profit by product category in france</p></div>  
+            <p>Total profit by product category in france</p>
+            <canvas id=""></canvas>
+          </div>  
         <div class="grid-item col-2 col-s-6">
-            <p>Profit customer gender by product category</p></div>
+            <p>Profit customer gender by product category</p>
+            <canvas id=""></canvas>
+          </div>
       </div> 
       </div>
 
