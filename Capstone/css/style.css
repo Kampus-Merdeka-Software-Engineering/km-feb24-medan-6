@@ -51,22 +51,68 @@
     align-items: center;
 }
 
+.filterdrop {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  #toggleDropdownbulan,
+  #toggleDropdowntahun {
+    background-color: rgb(212, 209, 209);
+    padding: 0.5rem 9rem;
+  }
+  #dropdownbulan {
+    position: absolute;
+    color: black;
+    background-color: rgb(212, 209, 209);
+    min-width: 330px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    margin-top: 2.7rem;
+    z-index: 1;
+  }
+  
+  #dropdowntahun {
+    position: absolute;
+    color: black;
+    background-color: rgb(212, 209, 209);
+    min-width: 330px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    margin-top: 5rem;
+    z-index: 1;
+  }
+  
+  #dropdownbulan label,
+  #dropdowntahun label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #dropdownbulan label span,
+  #dropdowntahun label span {
+    font-size: 0.7rem;
+    color: rgb(43, 40, 40);
+  }
+  
 
-.nav-dropdown {
-    /* background-color: rgb(149, 149, 175); */
+.nav-option-container {
     flex: 1;
-    color: white;
+    color: black;
     display: flex;
     justify-content: space-around;
     align-items: center;
-}
+  
+} 
 
 .total-item {
     flex: 1;
     background-color: rgb(212, 209, 209);
     text-align: center;
     border: 1px solid #15417a;
-    margin: 20px;
+    margin: 30px;
+    border-radius: 0.8rem;
 }
 
 /* Media query untuk layar tablet */

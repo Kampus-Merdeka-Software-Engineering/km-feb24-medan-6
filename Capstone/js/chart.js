@@ -28,9 +28,6 @@ function loadJson(){
 loadJson()
 
 
-
-
-
 const ctx1 = document.getElementById('myChart');
       
         new Chart(ctx1, {
