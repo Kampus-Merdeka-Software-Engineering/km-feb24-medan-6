@@ -13,39 +13,122 @@ async function loadAllJSON() {
   return data;
 }
 
-async function loadData(){
-  const franceD = await loadFranceJSON() 
-  
-  let filtered = franceD.filter(filtering)
 
-  let groupedBy = Object.groupBy(filtered, d => d.Customer_Gender)
-  let sum =0;
-  groupedBy.F.forEach(femaledata => {
-    sum += femaledata.Profit
+
+async function main() {
+  const data1 = await loadAllJSON();
+  const data2 = await loadFranceJSON();
+
+
+  if (data1) {
+    // Transform data for the charts
+    const profitByCountry = getProfitByCountry(data1);
+    const genderDistribution = getGenderDistribution(data1);
+    const productCategory = getProductCategory(data1);
+    const ageGroup = getAgeGroup(data1);
+
+    // Update the charts with the transformed data
+    updateTotalProfitChart(profitByCountry);
+    updateTotalProfitGenderChart(genderDistribution);
+  }
+
+  // if (data2) {
+  //   // Transform data for the charts
+  //   const profitByCountry = getProfitByCountry(data2);
+  //   const genderDistribution = getGenderDistribution(data2);
+
+  //   // Update the charts with the transformed data
+  //   updateTotalProfitChart(profitByCountry);
+  //   updateTotalProfitGenderChart(genderDistribution);
+  // }
+}
+
+function getProfitByCountry(data) {
+  const profitByCountry = {};
+  data.forEach(item => {
+    if (!profitByCountry[item.Country]) {
+      profitByCountry[item.Country] = 0;
+    }
+    profitByCountry[item.Country] += item.Profit;
   });
-  debugger
 
-}
-function filtering(countrybikesales) {
-  return countrybikesales.Month == "January"
-}
-
-
-loadData()
-
-
-function handleOnChangeMonth(element){
-    let month = element.value
-
+  return {
+    countries: Object.keys(profitByCountry),
+    values: Object.values(profitByCountry)
+  };
 }
 
+function getProductCategory(data) {
+  const ProductCategory = { Accessories: 0, Bikes: 0 , Clothing: 0};
+  data.forEach(item => {
+    if (item.Product_Category in ProductCategory) {
+      ProductCategory[item.Product_Category] += 1;
+    }
+  });
 
-const ages = [32, 33, 16, 40];
-const result = ages.filter(checkAdult);
-
-function checkAdult(age) {
-  return age >= 18;
+  return Object.values(Product_Category);
 }
+
+function getGenderDistribution(data) {
+  const genderDistribution = { M: 0, F: 0 };
+  data.forEach(item => {
+    if (item.Customer_Gender in genderDistribution) {
+      genderDistribution[item.Customer_Gender] += 1;
+    }
+  });
+
+  return Object.values(genderDistribution);
+}
+
+function getAgeGroup(data) {
+  
+
+  return Object.values(genderDistribution);
+}
+
+
+
+window.onload = main;
+
+function getCheckboxValuesMonth() {
+  // Get all checkbox elements with the class 'myCheckbox'
+  const checkboxes = document.querySelectorAll('.myCheckboxMonth');
+  const checkedValues = [];
+  
+  // Iterate over each checkbox
+  checkboxes.forEach(checkbox => {
+      // Check if the checkbox is checked
+      if (checkbox.checked) {
+          // Add the value of the checked checkbox to the array
+          checkedValues.push(checkbox.value);
+      }
+  });
+
+  // Log and alert the values of the checked checkboxes
+  console.log('Checked values:', checkedValues);
+  alert('Checked values: ' + checkedValues.join(', '));
+}
+
+function getCheckboxValuesYear() {
+  // Get all checkbox elements with the class 'myCheckbox'
+  const checkboxes = document.querySelectorAll('.myCheckboxYear');
+  const checkedValues = [];
+
+  // Iterate over each checkbox
+  checkboxes.forEach(checkbox => {
+      // Check if the checkbox is checked
+      if (checkbox.checked) {
+          // Add the value of the checked checkbox to the array
+          checkedValues.push(checkbox.value);
+      }
+  });
+
+  // Log and alert the values of the checked checkboxes
+  console.log('Checked values:', checkedValues);
+  alert('Checked values: ' + checkedValues.join(', '));
+}
+
+
 
 document
   .getElementById("toggleDropdownbulan")
@@ -110,48 +193,60 @@ new Chart(tppcc, {
 
 
 
-const ctx = document.getElementById("myChart");
-new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ['United States', 'Australia', 'United Kingdom', 'Canada', 'germany', 'France'],
-    datasets: [
-      {
-        axis: "y",
-        label: "Profit",
-        data: [6187169, 3991425, 2402989, 2167470, 2058238, 2045254],
-        fill: false,
+function updateTotalProfitChart(profitData) {
+  const ctx = document.getElementById('TotalProfitChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: profitData.countries,
+      datasets: [{
+        label: '# Profit',
+        data: profitData.values,
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-          "rgba(255, 205, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(201, 203, 207, 0.2)",
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
         ],
         borderColor: [
-          "rgb(255, 99, 132)",
-          "rgb(255, 159, 64)",
-          "rgb(255, 205, 86)",
-          "rgb(75, 192, 192)",
-          "rgb(54, 162, 235)",
-          "rgb(153, 102, 255)",
-          "rgb(201, 203, 207)",
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
         ],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    indexAxis: "y",
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
+        borderWidth: 1
+      }]
     },
-  },
-});
+    options: {
+      indexAxis: 'y',
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+function updateTotalProfitGenderChart(genderData) {
+  const ctx = document.getElementById('TotalProfitGenderChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['M', 'F'],
+      datasets: [{
+        data: genderData,
+        borderWidth: 1
+      }]
+    }
+  });
+}
 
 // total profit in eropa grop by age
 const age = document.getElementById("age-Chart-eropa").getContext("2d");
@@ -446,3 +541,5 @@ const genderSalesConfig = {
 
 // Membuat grafik menggunakan konfigurasi yang telah ditentukan
 const genderSalesChart = new Chart(ctxGenderSalesChart, genderSalesConfig);
+
+

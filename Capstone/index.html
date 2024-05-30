@@ -24,15 +24,15 @@
             <div class="nav-total">
                 <div class="total-item">
                 <h5>Total profit</h5>
-                <p>18,85 M €</p>
+                <div id="displayTprofit">18,85 M €</div>
                 </div>
                 <div class="total-item">
                 <h5>Order_Quantity</h5>
-                <p>1.29 M €</p>
+                <div id="displayOquantity">1.29 M €</div>
                 </div>
                 <div class="total-item">
                 <h5>Profit lowest country</h5>
-                <p>2,05 M €</p>
+                <div id="displayLcountry">2,05 M €</div>
                 </div>
             </div>
             <div class="nav-dropdown">
@@ -61,42 +61,42 @@
                     <button id="toggleDropdownbulan">Pilih Bulan</button>
                     <div id="dropdownbulan" style="display: none">
                       <label
-                        ><input type="checkbox" name="bulan" value="7" /> Juli
-                        <span>203,3rb</span></label><br />
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="7" /> Juli
+                        <span>120,9K</span></label><br />
                       <label
-                        ><input type="checkbox" name="bulan" value="8" /> Agustus
-                        <span>203,3rb</span></label><br />
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="8" /> Agustus
+                        <span>132,2K</span></label><br />
                       <label
-                        ><input type="checkbox" name="bulan" value="9" /> September
-                        <span>203,3rb</span></label><br />
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="9" /> September
+                        <span>139,3K</span></label><br />
                       <label
-                        ><input type="checkbox" name="bulan" value="10" /> Oktober
-                        <span>203,3rb</span></label><br />
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="10" /> Oktober
+                        <span>107,9K</span></label><br />
                       <label
-                        ><input type="checkbox" name="bulan" value="11" /> November
-                        <span>203,3rb</span></label><br />
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="11" /> November
+                        <span>126,4K</span></label><br />
                       <label
-                        ><input type="checkbox" name="bulan" value="12" /> Desember
-                        <span>203,3rb</span></label><br />
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="12" /> Desember
+                        <span>215,3K</span></label><br />
                       <!-- Tambahkan opsi lain di sini sesuai kebutuhan -->
                     </div>
                     <button id="toggleDropdowntahun">Pilih Tahun</button>
                     <div id="dropdowntahun" style="display: none">
                       <label
-                        ><input type="checkbox" name="bulan" value="1" /> 2015
-                        <span>203,3rb</span></label
+                        ><input type="checkbox" class="myCheckboxYear" name="bulan" value="1" /> 2013
+                        <span>496,6K</span></label
                       ><br />
                       <label
-                        ><input type="checkbox" name="bulan" value="2" /> 2016
-                        <span>203,3rb</span></label
+                        ><input type="checkbox" class="myCheckboxYear" name="bulan" value="2" /> 2014
+                        <span>566,7K</span></label
                       ><br />
                       <label
-                        ><input type="checkbox" name="bulan" value="3" /> 2017
-                        <span>203,3rb</span></label
+                        ><input type="checkbox" class="myCheckboxYear" name="bulan" value="3" /> 2015
+                        <span>450,7K</span></label
                       ><br />
                       <label
-                        ><input type="checkbox" name="bulan" value="4" /> 2018
-                        <span>203,3rb</span>
+                        ><input type="checkbox" class="myCheckboxYear" name="bulan" value="4" /> 2016
+                        <span>531,2K</span>
                       </label>
                     </div>
                   </div>
@@ -129,15 +129,15 @@
         </div>
         <div class="grid-item col-2 col-s-6">
             <p>Profit age group by product category</p>
-            <canvas id=""></canvas>
+            <canvas id="salesChartq3q4"></canvas>
           </div>
         <div class="grid-item col-2 col-s-6">
             <p>Total profit by product category in france</p>
-            <canvas id=""></canvas>
+            <canvas id="psfranceq3q4"></canvas>
           </div>  
         <div class="grid-item col-2 col-s-6">
             <p>Profit customer gender by product category</p>
-            <canvas id=""></canvas>
+            <canvas id="genderSCq3q4"></canvas>
           </div>
       </div> 
       </div>
