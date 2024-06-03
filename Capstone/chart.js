@@ -14,9 +14,11 @@ async function handleOnMonthFilter(element) {
 
   // group by
   let genderByDistribution = getGenderDistribution(filtered)
+  let totalProfitbyCountry = getProfitByCountry(filtered)
 
   // update charts
   updateTotalProfitGenderChart(genderByDistribution)
+  updateTotalProfitChart(totalProfitbyCountry)
 }
 
 async function handleOnYearFilter(element) {
@@ -30,8 +32,10 @@ async function handleOnYearFilter(element) {
 
   // group by
   let genderByDistribution = getGenderDistribution(filtered)
+  let totalProfitbyCountry = getProfitByCountry(filtered)
 
   // update charts
+  updateTotalProfitChart(totalProfitbyCountry)
   updateTotalProfitGenderChart(genderByDistribution)
 }
 
@@ -64,7 +68,7 @@ async function loadFranceJSON() {
 async function loadAllJSON() {
   const response = await fetch('data_blmcleaning.json');
   const data = await response.json();
-
+  
   return data;
 }
 
@@ -82,7 +86,7 @@ async function main() {
     // const ageGroup = getAgeGroup(data1);
 
     // Update the charts with the transformed data
-    // updateTotalProfitChart(profitByCountry);
+    updateTotalProfitChart(profitByCountry);
     updateTotalProfitGenderChart(genderDistribution);
   }
 
@@ -248,7 +252,10 @@ new Chart(tppcc, {
 
 
 function updateTotalProfitChart(profitData) {
-  const ctx = document.getElementById('TotalProfitChart').getContext('2d');
+  const chartId = 'TotalProfitChart'
+  const ctx = document.getElementById(chartId).getContext('2d');
+  destroyChart(chartId)
+
   new Chart(ctx, {
     type: 'bar',
     data: {
