@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/layout.css">
+    
+        <title>Bike Sales</title>
+    </head>
 <body>
     <nav class="navbar">
         <div class="nav-title-container">
             <div class="nav-logo">
-                <img src="logorevoU.png" alt="" title="kuda poni" width="200">
+                <img src="logorevoU.png" alt="" title="logorevoU" width="200">
             </div>
             <div class="nav-title">
                 <h1>Bike Sales in Europa Dashboard</h1>
@@ -23,37 +25,69 @@
         <div class="nav-option-container">
             <div class="nav-total">
                 <div class="total-item">
-                <p>Total profit</p>
+                <h4>Total profit</h4>
+                    <p>18,85 jt €</p>
                 </div>
                 <div class="total-item">
-                <p>Order_Quantity</p>
+                <h4>Order_Quantity</h4>
+                <p>1,29 jt</p>
                 </div>
                 <div class="total-item">
-                <p>Profit lowest country</p>
+                <h4>Profit lowest country</h4>
+                <p>2,05 jt €</p>
                 </div>
             </div>
-            <div class="nav-dropdown">
-            <div class="dropdown-content">
-                    <div>
-                    <label for="Month">Month</label>
-                    <select name="Month" id="Month">
-                    <option value="December">December</option>
-                    <option value="November">November</option>
-                    <option value="October">October</option>
-                    <option value="september">september</option>
-                    </select>
-                    </div>
-                    <br>
-                    <div>
-                    <label for="Year">Year</label>
-                    <select name="Year" id="Year">
-                    <option value="2014">2014</option>
-                    <option value="2015">2015</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    </select>
-                    </div>
-                </div>
+            <div class="filterdrop">
+                <button id="toggleDropdownbulan">Month</button>
+                <div id="dropdownbulan" style="display: none">
+                  <label>
+                    <input type="checkbox" name="month" value="01" /> July
+                    <span>203,3rb</span></label>
+                    <br />
+                  <label>
+                    <input type="checkbox" name="month" value="02" /> August
+                    <span>203,3rb</span></label>
+                    <br />
+                  <label>
+                    <input type="checkbox" name="month" value="03" /> September
+                    <span>203,3rb</span></label>
+                    <br />
+                  <label>
+                    <input type="checkbox" name="month" value="04" /> October
+                    <span>203,3rb</span></label>
+                    <br />
+                 <label>
+                    <input type="checkbox" name="month" value="05" /> November
+                    <span>203,3rb</span></label>
+                    <br />
+                 <label>
+                    <input type="checkbox" name="month" value="06" /> December
+              <span>203,3rb</span></label><br/>
+
+            </div>
+            <button id="toggleDropdowntahun">Year</button>
+            <div id="dropdowntahun" style="display: none">
+              <label
+                ><input type="checkbox" name="year" value="01" /> 2013
+                <span>203,3rb</span></label
+              ><br />
+              <label
+                ><input type="checkbox" name="year" value="02" /> 2014
+                <span>203,3rb</span></label
+              ><br />
+              <label
+                ><input type="checkbox" name="year" value="03" /> 2015
+                <span>203,3rb</span></label
+              ><br />
+              <label
+                ><input type="checkbox" name="year" value="04" /> 2016
+                <span>203,3rb</span>
+              </label>
+            </div>
+              </div>
+            </div>
+            </div>
+        </div>
     </nav>
     <div class="grid-container">
         <div class="grid-item col-6">
@@ -61,50 +95,45 @@
             <canvas id="myChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-        <p>Total in profit by age group</p></div>
+            <p>Total in profit by age group</p>
+            <canvas id="age"></canvas>
+          </div>
+          <div class="grid-item col-2 col-s-6">
+              <p>Total in profit by customer_gender</p>
+              <canvas id="customer_gender"></canvas>
+           </div> 
         <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by customer_gender</p> </div>  
-        <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by product_category</p></div>
+            <p>Total in profit by product_category</p>
+            <canvas id="product_category"></canvas>
+        </div>
         <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france </p></div>
+            <p>Total profit Q3 & Q4 in france </p>
+            <canvas id="total_profit"></canvas>
+        </div>
         <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france by sub category</p></div>
+            <p>Total profit Q3 & Q4 in france by sub category</p>
+            <canvas id="sub_category"></canvas>
+        </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Profit age group by product category</p></div>
-        <div class="grid-item col-2 col-s-6">
-            <p>Total profit by product category in france</p></div>  
-        <div class="grid-item col-2 col-s-6">
-            <p>Profit customer gender by product category</p></div>
+            <p>Profit age group by product category</p>
+            <canvas id="agegrup_infrance"></canvas>
+        </div>
+          <div class="grid-item col-2 col-s-6">
+            <p>Total profit by product category in france</p>
+            <canvas id="productcategory_infrance"></canvas>
+        </div>  
+          <div class="grid-item col-2 col-s-6">
+            <p>Profit customer gender by product category</p>
+            <canvas id="customergender_infrance"></canvas>
+        </div>
       </div> 
       </div>
 
 
       
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script>
-        const ctx = document.getElementById('myChart');
-      
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['United States', 'Australia', 'United Kingdom', 'Canada', 'germany', 'France'],
-            datasets: [{
-              label: '# Profit',
-              data: [6187169, 3991425, 2402989, 2167470, 2058238, 2045254],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            indexAxis: 'y',
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-      </script>
+      <script src="chart.js"></script>
+    
 
       
     </body>
