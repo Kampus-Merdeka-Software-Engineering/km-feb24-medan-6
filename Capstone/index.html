@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>BikeSales</title>
 </head>
 <body>
     <nav class="navbar">
@@ -14,7 +14,7 @@
                 <img src="logorevoU.png" alt="" title="kuda poni" width="200">
             </div>
             <div class="nav-title">
-                <h1>Bike Sales in Europa Dashboard</h1>
+                <h1>Bike Sales Data Dashboard</h1>
             </div>
             <div class="nav-tim">
                 <p>Team 6-Medan</p>
@@ -24,39 +24,18 @@
             <div class="nav-total">
                 <div class="total-item">
                 <h5>Total profit</h5>
-                <div id="displayTprofit">18,85 </div>M €
+                <div id="displayTprofit">18,85 M €</div>
                 </div>
                 <div class="total-item">
                 <h5>Order_Quantity</h5>
-                <div id="displayOquantity">1.29 </div>M €
+                <div id="displayOquantity">1.29 M €</div>
                 </div>
                 <div class="total-item">
                 <h5>Profit lowest country</h5>
-                <div id="displayLcountry">2,05 </div>M €
+                <div id="displayLcountry">2,05 M €  </div>
                 </div>
             </div>
             <div class="nav-dropdown">
-                <!-- <div class="dropdown-content">
-                    <div>
-                    <label for="Month">Month</label>
-                    <select onchange="handleOnChangeMonth(this)" name="Month" id="Month">
-                    <option value="December">December</option>
-                    <option value="November">November</option>
-                    <option value="October">October</option>
-                    <option value="september">september</option>
-                    </select>
-                    </div>
-                    <br>
-                    <div>
-                    <label for="Year">Year</label>
-                    <select name="Year" id="Year">
-                    <option value="2014">2014</option>
-                    <option value="2015">2015</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    </select>
-                    </div>
-                </div> -->
                 <div class="filterdrop">
                     <button id="toggleDropdownbulan">Pilih Bulan</button>
                     <div id="dropdownbulan" style="display: none">
@@ -104,39 +83,39 @@
     </nav>
     <div class="grid-container">
         <div class="grid-item col-6">
-            <p>Total profit in countries</p>
+            <p>Total Profit by Countries</p>
             <canvas id="TotalProfitChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-        <p>Total in profit by age group</p>
+        <p>Total Profit by Age Group</p>
         <canvas id="age-Chart-eropa"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by customer_gender</p> 
+            <p>Total Profit by Customer Gender</p> 
             <canvas id="TotalProfitGenderChart"></canvas>
         </div>  
         <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by product_category</p>
+            <p>Total Profit by Produk Category</p>
             <canvas id="category-chart-eropa"></canvas>
         </div>
         <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france </p>
+            <p>Total Profit Q3 & Q4 in France </p>
             <canvas id="salesChart"></canvas>
         </div>
         <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france by sub category</p>
+            <p>Total Profit by Sub Category Q3 & Q4 in France</p>
             <canvas id="productSalesChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Profit age group by product category</p>
+            <p>Profit Age_Group by Category Q3 & Q4 in France</p>
             <canvas id="salesChartq3q4"></canvas>
           </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Total profit by product category in france</p>
+            <p>Total Profit by Produk Category Q3 & Q4 in France</p>
             <canvas id="psfranceq3q4"></canvas>
           </div>  
         <div class="grid-item col-2 col-s-6">
-            <p>Profit customer gender by product category</p>
+            <p>Profit Customer Gender by Product Category Q3 & Q4 in France</p>
             <canvas id="genderSCq3q4"></canvas>
           </div>
       </div> 
