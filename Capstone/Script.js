@@ -1,4 +1,63 @@
 
+let monthFilters = []
+let yearFilters = []
+
+
+async function handleOnMonthFilter(element) {
+  const allData = await loadAllJSON();
+
+  // update current filters
+  monthFilters = updateFilter(element, monthFilters)
+
+  // filter
+  let filtered = filterDataBySelectedFilters(allData)
+
+  // group by
+  let genderByDistribution = getGenderDistribution(filtered)
+  let totalProfitbyCountry = getProfitByCountry(filtered)
+
+  // update charts
+  updateTotalProfitGenderChart(genderByDistribution)
+  updateTotalProfitChart(totalProfitbyCountry)
+}
+
+async function handleOnYearFilter(element) {
+  const allData = await loadAllJSON();
+
+  // update current filters
+  yearFilters = updateFilter(element, yearFilters)
+
+  // filter
+  let filtered = filterDataBySelectedFilters(allData)
+
+  // group by
+  let genderByDistribution = getGenderDistribution(filtered)
+  let totalProfitbyCountry = getProfitByCountry(filtered)
+
+  // update charts
+  updateTotalProfitChart(totalProfitbyCountry)
+  updateTotalProfitGenderChart(genderByDistribution)
+}
+
+function filterDataBySelectedFilters(data) {
+  return data.filter((salesData => {
+    let selectedMonth = monthFilters.length == 0 ? true : monthFilters.includes(salesData['Month'])
+    let selectedYear = yearFilters.length == 0 ? true : yearFilters.includes(salesData['Year'].toString())
+
+    return selectedMonth && selectedYear
+  }))
+}
+
+function updateFilter(element, currentFilters) {
+  let filterValue = element.value
+  if (element.checked) {
+      currentFilters.push(filterValue)
+      return currentFilters
+  }
+
+  return currentFilters.filter(item => item !== filterValue)
+}
+
 async function loadFranceJSON() {
   const response = await fetch('data_france.json');
   const data = await response.json();
@@ -9,10 +68,9 @@ async function loadFranceJSON() {
 async function loadAllJSON() {
   const response = await fetch('data_blmcleaning.json');
   const data = await response.json();
-
+  
   return data;
 }
-
 
 
 async function main() {
@@ -25,7 +83,7 @@ async function main() {
     const profitByCountry = getProfitByCountry(data1);
     const genderDistribution = getGenderDistribution(data1);
     const productCategory = getProductCategory(data1);
-    const ageGroup = getAgeGroup(data1);
+    // const ageGroup = getAgeGroup(data1);
 
     // Update the charts with the transformed data
     updateTotalProfitChart(profitByCountry);
@@ -66,7 +124,7 @@ function getProductCategory(data) {
     }
   });
 
-  return Object.values(Product_Category);
+  return Object.values(ProductCategory);
 }
 
 function getGenderDistribution(data) {
@@ -157,20 +215,20 @@ document
 
 
 const tppcc = document.getElementById('TotalProfitPCategoryChart');
-const tpgc = document.getElementById('TotalProfitGenderChart');
+// const tpgc = document.getElementById('TotalProfitGenderChart');
 
       
 
-new Chart(tpgc, {
-  type: 'doughnut',
-  data: {
-    labels: ['M', 'F'],
-    datasets: [{
-      data: [52.5, 47.5],
-      borderWidth: 1
-    }]
-  }
-});
+// new Chart(tpgc, {
+//   type: 'doughnut',
+//   data: {
+//     labels: ['M', 'F'],
+//     datasets: [{
+//       data: [52.5, 47.5],
+//       borderWidth: 1
+//     }]
+//   }
+// });
 
 new Chart(tppcc, {
   type: 'bar',
@@ -194,7 +252,10 @@ new Chart(tppcc, {
 
 
 function updateTotalProfitChart(profitData) {
-  const ctx = document.getElementById('TotalProfitChart').getContext('2d');
+  const chartId = 'TotalProfitChart'
+  const ctx = document.getElementById(chartId).getContext('2d');
+  destroyChart(chartId)
+
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -234,8 +295,18 @@ function updateTotalProfitChart(profitData) {
   });
 }
 
+function destroyChart(chartId) {
+  let chartStatus = Chart.getChart(chartId);
+    if (chartStatus !== undefined) {
+        chartStatus.destroy()
+    }
+}
+
 function updateTotalProfitGenderChart(genderData) {
-  const ctx = document.getElementById('TotalProfitGenderChart').getContext('2d');
+  const chartId = 'TotalProfitGenderChart'
+  destroyChart(chartId)
+
+  const ctx = document.getElementById(chartId).getContext('2d');
   new Chart(ctx, {
     type: 'doughnut',
     data: {
