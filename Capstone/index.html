@@ -5,18 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/layout.css">
-
-    <title>Bike Sales</title>
+    <title>BikeSales</title>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-title-container">
             <div class="nav-logo">
-                <img src="logorevoU.png" alt="" title="logorevoU" width="200">
+                <img src="logorevoU.png" alt="" title="kuda poni" width="200">
             </div>
             <div class="nav-title">
-                <h1>Bike Sales in Europa Dashboard</h1>
+                <h1>Bike Sales Data Dashboard</h1>
             </div>
             <div class="nav-tim">
                 <p>Team 6-Medan</p>
@@ -25,113 +23,104 @@
         <div class="nav-option-container">
             <div class="nav-total">
                 <div class="total-item">
-                <h4>Total profit</h4>
-                    <p>18,85 jt €</p>
+                <h5>Total profit</h5>
+                <div id="displayTprofit">18,85 M €</div>
                 </div>
                 <div class="total-item">
-                <h4>Order_Quantity</h4>
-                <p>1,29 jt</p>
+                <h5>Order_Quantity</h5>
+                <div id="displayOquantity">1.29 M €</div>
                 </div>
                 <div class="total-item">
-                <h4>Profit lowest country</h4>
-                <p>2,05 jt €</p>
+                <h5>Profit lowest country</h5>
+                <div id="displayLcountry">2,05 M €  </div>
                 </div>
             </div>
-            <div class="filterdrop">
-                <button id="toggleDropdownbulan">Month</button>
-                <div id="dropdownbulan" style="display: none">
-                  <label>
-                    <input type="checkbox" name="month" value="01" /> July
-                    <span>203,3rb</span></label>
-                    <br />
-                  <label>
-                    <input type="checkbox" name="month" value="02" /> August
-                    <span>203,3rb</span></label>
-                    <br />
-                  <label>
-                    <input type="checkbox" name="month" value="03" /> September
-                    <span>203,3rb</span></label>
-                    <br />
-                  <label>
-                    <input type="checkbox" name="month" value="04" /> October
-                    <span>203,3rb</span></label>
-                    <br />
-                 <label>
-                    <input type="checkbox" name="month" value="05" /> November
-                    <span>203,3rb</span></label>
-                    <br />
-                 <label>
-                    <input type="checkbox" name="month" value="06" /> December
-              <span>203,3rb</span></label><br/>
-
-            </div>
-            <button id="toggleDropdowntahun">Year</button>
-            <div id="dropdowntahun" style="display: none">
-              <label
-                ><input type="checkbox" name="year" value="01" /> 2013
-                <span>203,3rb</span></label
-              ><br />
-              <label
-                ><input type="checkbox" name="year" value="02" /> 2014
-                <span>203,3rb</span></label
-              ><br />
-              <label
-                ><input type="checkbox" name="year" value="03" /> 2015
-                <span>203,3rb</span></label
-              ><br />
-              <label
-                ><input type="checkbox" name="year" value="04" /> 2016
-                <span>203,3rb</span>
-              </label>
-            </div>
-              </div>
-            </div>
-            </div>
-        </div>
+            <div class="nav-dropdown">
+                <div class="filterdrop">
+                    <button id="toggleDropdownbulan">Pilih Bulan</button>
+                    <div id="dropdownbulan" style="display: none">
+                      <label
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="July" onchange="handleOnMonthFilter(this)"/> July
+                        <span>120,9K</span></label><br />
+                      <label
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="August" onchange="handleOnMonthFilter(this)"/> Agustus
+                        <span>132,2K</span></label><br />
+                      <label
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="September" onchange="handleOnMonthFilter(this)"/> September
+                        <span>139,3K</span></label><br />
+                      <label
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="October" onchange="handleOnMonthFilter(this)"/> Oktober
+                        <span>107,9K</span></label><br />
+                      <label
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="November" onchange="handleOnMonthFilter(this)"/> November
+                        <span>126,4K</span></label><br />
+                      <label
+                        ><input type="checkbox" class="myCheckboxMonth" name="bulan" value="December" onchange="handleOnMonthFilter(this)"/> Desember
+                        <span>215,3K</span></label><br />
+                      <!-- Tambahkan opsi lain di sini sesuai kebutuhan -->
+                    </div>
+                    <button id="toggleDropdowntahun">Pilih Tahun</button>
+                    <div id="dropdowntahun" style="display: none">
+                      <label
+                        ><input type="checkbox" class="myCheckboxYear" name="bulan" value="2013" onchange="handleOnYearFilter(this)"/> 2013
+                        <span>496,6K</span></label
+                      ><br />
+                      <label><input type="checkbox" class="myCheckboxYear" name="bulan" value="2014" onchange="handleOnYearFilter(this)"/> 2014
+                        <span>566,7K</span></label><br />
+                      <label
+                        ><input type="checkbox" class="myCheckboxYear" name="bulan" value="2015" onchange="handleOnYearFilter(this)"/> 2015
+                        <span>450,7K</span></label><br />
+                      <label><input type="checkbox" class="myCheckboxYear" name="bulan" value="2016" onchange="handleOnYearFilter(this)"/> 2016
+                        <span>531,2K</span>
+                      </label>
+                    </div>
+                  </div>
+            
     </nav>
-
     <div class="grid-container">
         <div class="grid-item col-6">
-            <p>Total profit in Europa</p>
-            <canvas id="myChart"></canvas>
+            <p>Total Profit by Countries</p>
+            <canvas id="TotalProfitChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-        <p>Total in profit by age group</p>
-        <canvas id="age"></canvas>
-    </div>
-        <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by customer_gender</p>
-            <canvas id="customer_gender"></canvas>
-         </div>  
-        <div class="grid-item col-2 col-s-6">
-            <p>Total in profit by product_category</p>
-            <canvas id="product_category"></canvas>
-        </div>
-        <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france </p>
-            <canvas id="total_profit"></canvas>
-        </div>
-        <div class="grid-item col-3 col-s-6">
-            <p>Total profit Q3 & Q4 in france by sub category</p>
-            <canvas id="sub_category"></canvas>
+        <p>Total Profit by Age Group</p>
+        <canvas id="TotalProfitAgeChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Profit age group by product category</p>
-            <canvas id="agegrup_infrance"></canvas>
-        </div>
-        <div class="grid-item col-2 col-s-6">
-            <p>Total profit by product category in france</p>
-            <canvas id="productcategory_infrance"></canvas>
+            <p>Total Profit by Customer Gender</p> 
+            <canvas id="TotalProfitGenderChart"></canvas>
         </div>  
         <div class="grid-item col-2 col-s-6">
-            <p>Profit customer gender by product category</p>
-            <canvas id="customergender_infrance"></canvas>
+            <p>Total Profit by Produk Category</p>
+            <canvas id="TotalProfitProductCategory"></canvas>
         </div>
+        <div class="grid-item col-3 col-s-6">
+            <p>Total Profit Q3 & Q4 in France </p>
+            <canvas id="ProfitByFrance"></canvas>
+        </div>
+        <div class="grid-item col-3 col-s-6">
+            <p>Total Profit by Sub Category Q3 & Q4 in France</p>
+            <canvas id="ProfitBySubCategoryFrance"></canvas>
+        </div>
+        <div class="grid-item col-2 col-s-6">
+            <p>Profit Age_Group by Product Category Q3 & Q4 in France</p>
+            <canvas id="ProfitAgeGroupByProductCategory"></canvas>
+          </div>
+        <div class="grid-item col-2 col-s-6">
+            <p>Total Profit by Produk Category Q3 & Q4 in France</p>
+            <canvas id="ProfitByProductCategoryinFrance"></canvas>
+          </div>  
+        <div class="grid-item col-2 col-s-6">
+            <p>Total Profit Customer Gender by Product Category Q3 & Q4 in France</p>
+            <canvas id="ProfitCustomerGenderByProductCategory"></canvas>
+          </div>
       </div> 
       </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/chart.js"></script>
-    <script src="js/coba.js"></script>   
+
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="Script.js"></script>     
+    </body>
 </body>
 </html>

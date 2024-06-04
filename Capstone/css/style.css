@@ -23,6 +23,7 @@
     align-self: flex-start;
     padding: 5px;
     justify-content: flex-start;
+    
 }
 .nav-logo {
     flex: 1;
@@ -35,7 +36,7 @@
 .nav-title {
     color: white;
     /* background-color: #abb2bc; */
-    font-size: large;
+    font-size: larger;
     flex: 1;
     text-align: center;
     padding: 5px;
@@ -49,6 +50,20 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    font-size: 1rem;
+}
+
+.nav-total h5 {
+    font-weight: 800;
+  }
+
+.nav-dropdown {
+    /* background-color: rgb(149, 149, 175); */
+    flex: 1;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .filterdrop {
@@ -59,7 +74,7 @@
   #toggleDropdownbulan,
   #toggleDropdowntahun {
     background-color: rgb(212, 209, 209);
-    padding: 0.5rem 9rem;
+    padding: 0.5rem 5rem;
   }
   #dropdownbulan {
     position: absolute;
@@ -95,23 +110,15 @@
     font-size: 0.7rem;
     color: rgb(43, 40, 40);
   }
-  
 
-.nav-option-container {
-    flex: 1;
-    color: black;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  
-} 
+
 
 .total-item {
     flex: 1;
     background-color: rgb(212, 209, 209);
     text-align: center;
     border: 1px solid #15417a;
-    margin: 30px;
+    margin: 15px;
     border-radius: 0.8rem;
 }
 
@@ -161,7 +168,9 @@
   color: black;
   border: 1px solid #15417a;
   text-align: center;
-  background-color: rgb(217, 214, 214)
+  background-color: rgb(217, 214, 214);
+  align-items: center;
+  
 }
 
 
@@ -201,5 +210,4 @@
         grid-column: auto / span 6;
     }
 }
-
 
