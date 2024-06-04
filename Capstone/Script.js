@@ -5,24 +5,36 @@ let yearFilters = []
 
 async function handleOnMonthFilter(element) {
   const allData = await loadAllJSON();
+  
 
   // update current filters
-  monthFilters = updateFilter(element, monthFilters)
+  monthFilters = updateFilter(element, monthFilters);
 
   // filter
   let filtered = filterDataBySelectedFilters(allData)
 
-  // group by
+// Group the filtered data by different categories
   let totalProfitbyProductCategory = getProfitbyProductCategory(filtered)
   let totalProfitbyAgeGroup = getProfitbyAgeGroup(filtered)
   let genderByDistribution = getGenderDistribution(filtered)
   let totalProfitbyCountry = getProfitByCountry(filtered)
+
+  // Calculate total profit, order quantity, and lowest profit country
+  let totalProfit = calculateTotalProfit(filtered);
+  let orderQuantity = calculateOrderQuantity(filtered);
+  let lowestProfitCountry = getLowestProfitCountry(filtered);
 
   // update charts
   updateTotalProfitProductCategory(totalProfitbyProductCategory)
   updateTotalProfitAgeChart(totalProfitbyAgeGroup)
   updateTotalProfitGenderChart(genderByDistribution)
   updateTotalProfitChart(totalProfitbyCountry)
+
+  // Update the HTML displays with the calculated values
+  document.getElementById('displayTprofit').innerText = `${totalProfit.toFixed(2)} M €`;
+  document.getElementById('displayOquantity').innerText = `${orderQuantity.toFixed(2)} M €`;
+  document.getElementById('displayLcountry').innerText = `${lowestProfitCountry.profit.toFixed(2)} M €`;
+
 }
 
 async function handleOnYearFilter(element) {
@@ -34,17 +46,42 @@ async function handleOnYearFilter(element) {
   // filter
   let filtered = filterDataBySelectedFilters(allData)
 
-  // group by
+  // Group the filtered data by different categories
   let totalProfitbyProductCategory = getProfitbyProductCategory(filtered)
   let totalProfitbyAgeGroup = getProfitbyAgeGroup(filtered)
   let genderByDistribution = getGenderDistribution(filtered)
   let totalProfitbyCountry = getProfitByCountry(filtered)
+
+  // Calculate total profit, order quantity, and lowest profit country
+  let totalProfit = calculateTotalProfit(filtered);
+  let orderQuantity = calculateOrderQuantity(filtered);
+  let lowestProfitCountry = getLowestProfitCountry(filtered);
 
   // update charts
   updateTotalProfitProductCategory(totalProfitbyProductCategory)
   updateTotalProfitAgeChart(totalProfitbyAgeGroup)
   updateTotalProfitChart(totalProfitbyCountry)
   updateTotalProfitGenderChart(genderByDistribution)
+
+  // Update the HTML displays with the calculated values
+  document.getElementById('displayTprofit').innerText = `${totalProfit.toFixed(2)} M €`;
+  document.getElementById('displayOquantity').innerText = `${orderQuantity.toFixed(2)} M €`;
+  document.getElementById('displayLcountry').innerText = `${lowestProfitCountry.profit.toFixed(2)} M €`;
+
+}
+
+function calculateTotalProfit(data) {
+  return data.reduce((sum, item) => sum + item.Profitt, 0) / 1e6; // Convert to millions
+}
+
+function calculateOrderQuantity(data) {
+  return data.reduce((sum, item) => sum + item.Order_Quantity, 0) / 1e6; // Convert to millions
+}
+
+function getLowestProfitCountry(data) {
+  return data.reduce((lowest, item) => {
+    return (lowest.Profit < item.Profit) ? lowest : item;
+  }, { country: '', profit: Infinity });
 }
 
 function filterDataBySelectedFilters(data) {
@@ -368,13 +405,13 @@ function updateTotalProfitAgeChart(ageGroupData) {
           'rgba(75, 192, 192, 0.2)',
           'rgba(54, 162, 235, 0.2)',
           'rgba(153, 102, 255, 0.2)',
-          'rgba(201, 203, 207, 0.2)'
+          'rgba(153, 102, 255, 0.2)'
         ],
         borderColor: [
           'rgb(75, 192, 192)',
           'rgb(54, 162, 235)',
           'rgb(153, 102, 255)',
-          'rgb(201, 203, 207)'
+          'rgb(153, 102, 255)'
         ],
         borderWidth: 1
       }]
