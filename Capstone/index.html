@@ -65,16 +65,12 @@
                         ><input type="checkbox" class="myCheckboxYear" name="bulan" value="2013" onchange="handleOnYearFilter(this)"/> 2013
                         <span>496,6K</span></label
                       ><br />
-                      <label
-                        ><input type="checkbox" class="myCheckboxYear" name="bulan" value="2014" onchange="handleOnYearFilter(this)"/> 2014
-                        <span>566,7K</span></label
-                      ><br />
+                      <label><input type="checkbox" class="myCheckboxYear" name="bulan" value="2014" onchange="handleOnYearFilter(this)"/> 2014
+                        <span>566,7K</span></label><br />
                       <label
                         ><input type="checkbox" class="myCheckboxYear" name="bulan" value="2015" onchange="handleOnYearFilter(this)"/> 2015
-                        <span>450,7K</span></label
-                      ><br />
-                      <label
-                        ><input type="checkbox" class="myCheckboxYear" name="bulan" value="2016" onchange="handleOnYearFilter(this)"/> 2016
+                        <span>450,7K</span></label><br />
+                      <label><input type="checkbox" class="myCheckboxYear" name="bulan" value="2016" onchange="handleOnYearFilter(this)"/> 2016
                         <span>531,2K</span>
                       </label>
                     </div>
@@ -88,7 +84,7 @@
         </div>
         <div class="grid-item col-2 col-s-6">
         <p>Total Profit by Age Group</p>
-        <canvas id="age-Chart-eropa"></canvas>
+        <canvas id="TotalProfitAgeChart"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
             <p>Total Profit by Customer Gender</p> 
@@ -96,27 +92,27 @@
         </div>  
         <div class="grid-item col-2 col-s-6">
             <p>Total Profit by Produk Category</p>
-            <canvas id="category-chart-eropa"></canvas>
+            <canvas id="TotalProfitProductCategory"></canvas>
         </div>
         <div class="grid-item col-3 col-s-6">
             <p>Total Profit Q3 & Q4 in France </p>
-            <canvas id="salesChart"></canvas>
+            <canvas id="ProfitByFrance"></canvas>
         </div>
         <div class="grid-item col-3 col-s-6">
             <p>Total Profit by Sub Category Q3 & Q4 in France</p>
-            <canvas id="productSalesChart"></canvas>
+            <canvas id="ProfitBySubCategoryFrance"></canvas>
         </div>
         <div class="grid-item col-2 col-s-6">
-            <p>Profit Age_Group by Category Q3 & Q4 in France</p>
-            <canvas id="salesChartq3q4"></canvas>
+            <p>Profit Age_Group by Product Category Q3 & Q4 in France</p>
+            <canvas id="ProfitAgeGroupByProductCategory"></canvas>
           </div>
         <div class="grid-item col-2 col-s-6">
             <p>Total Profit by Produk Category Q3 & Q4 in France</p>
-            <canvas id="psfranceq3q4"></canvas>
+            <canvas id="ProfitByProductCategoryinFrance"></canvas>
           </div>  
         <div class="grid-item col-2 col-s-6">
-            <p>Profit Customer Gender by Product Category Q3 & Q4 in France</p>
-            <canvas id="genderSCq3q4"></canvas>
+            <p>Total Profit Customer Gender by Product Category Q3 & Q4 in France</p>
+            <canvas id="ProfitCustomerGenderByProductCategory"></canvas>
           </div>
       </div> 
       </div>
@@ -124,11 +120,7 @@
 
       
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script src="Script.js"></script>
-    
-
-      
+      <script src="Script.js"></script>     
     </body>
-
 </body>
 </html>

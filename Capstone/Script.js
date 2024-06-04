@@ -13,10 +13,14 @@ async function handleOnMonthFilter(element) {
   let filtered = filterDataBySelectedFilters(allData)
 
   // group by
+  let totalProfitbyProductCategory = getProfitbyProductCategory(filtered)
+  let totalProfitbyAgeGroup = getProfitbyAgeGroup(filtered)
   let genderByDistribution = getGenderDistribution(filtered)
   let totalProfitbyCountry = getProfitByCountry(filtered)
 
   // update charts
+  updateTotalProfitProductCategory(totalProfitbyProductCategory)
+  updateTotalProfitAgeChart(totalProfitbyAgeGroup)
   updateTotalProfitGenderChart(genderByDistribution)
   updateTotalProfitChart(totalProfitbyCountry)
 }
@@ -31,10 +35,14 @@ async function handleOnYearFilter(element) {
   let filtered = filterDataBySelectedFilters(allData)
 
   // group by
+  let totalProfitbyProductCategory = getProfitbyProductCategory(filtered)
+  let totalProfitbyAgeGroup = getProfitbyAgeGroup(filtered)
   let genderByDistribution = getGenderDistribution(filtered)
   let totalProfitbyCountry = getProfitByCountry(filtered)
 
   // update charts
+  updateTotalProfitProductCategory(totalProfitbyProductCategory)
+  updateTotalProfitAgeChart(totalProfitbyAgeGroup)
   updateTotalProfitChart(totalProfitbyCountry)
   updateTotalProfitGenderChart(genderByDistribution)
 }
@@ -82,10 +90,13 @@ async function main() {
     // Transform data for the charts
     const profitByCountry = getProfitByCountry(data1);
     const genderDistribution = getGenderDistribution(data1);
-    const productCategory = getProductCategory(data1);
+    const profitbyAgeGroup = getProfitbyAgeGroup(data1);
+    const profitbyProductCategory = getProfitProductCategory(data1);
     // const ageGroup = getAgeGroup(data1);
 
     // Update the charts with the transformed data
+    updateTotalProfitProductCategory(profitbyProductCategory);
+    updateTotalProfitAgeChart(profitbyAgeGroup);
     updateTotalProfitChart(profitByCountry);
     updateTotalProfitGenderChart(genderDistribution);
   }
@@ -101,6 +112,34 @@ async function main() {
   // }
 }
 
+function getProfitProductCategory(data) {
+  const profitbyProductCategory = {};
+  data.forEach(item => {
+    if (!profitbyProductCategory[item.Product_Category]) {
+      profitbyProductCategory[item.Product_Category] = 0;
+    }
+    profitbyProductCategory[item.Product_Category] += item.Profit;
+  });
+
+  return {
+    countries: Object.keys(profitbyProductCategory),
+    values: Object.values(profitbyProductCategory)
+  };
+}
+function getProfitbyAgeGroup(data) {
+  const profitbyAgeGroup = {};
+  data.forEach(item => {
+    if (!profitbyAgeGroup[item.Age_Group]) {
+      profitbyAgeGroup[item.Age_Group] = 0;
+    }
+    profitbyAgeGroup[item.Age_Group] += item.Profit;
+  });
+
+  return {
+    countries: Object.keys(profitbyAgeGroup),
+    values: Object.values(profitbyAgeGroup)
+  };
+}
 function getProfitByCountry(data) {
   const profitByCountry = {};
   data.forEach(item => {
@@ -137,13 +176,6 @@ function getGenderDistribution(data) {
 
   return Object.values(genderDistribution);
 }
-
-function getAgeGroup(data) {
-  
-
-  return Object.values(genderDistribution);
-}
-
 
 
 window.onload = main;
@@ -295,6 +327,7 @@ function updateTotalProfitChart(profitData) {
   });
 }
 
+
 function destroyChart(chartId) {
   let chartStatus = Chart.getChart(chartId);
     if (chartStatus !== undefined) {
@@ -305,7 +338,6 @@ function destroyChart(chartId) {
 function updateTotalProfitGenderChart(genderData) {
   const chartId = 'TotalProfitGenderChart'
   destroyChart(chartId)
-
   const ctx = document.getElementById(chartId).getContext('2d');
   new Chart(ctx, {
     type: 'doughnut',
@@ -319,24 +351,136 @@ function updateTotalProfitGenderChart(genderData) {
   });
 }
 
-// total profit in eropa grop by age
-const age = document.getElementById("age-Chart-eropa").getContext("2d");
-const umur = ["0-10", "11-20", "21-30", "31-40", "41-50"];
-const data = {
-  labels: umur,
-  datasets: [
-    {
-      label: "Age Distribution",
-      data: [15, 25, 30, 20, 10], // Jumlah individu dalam setiap kelompok umur
-      backgroundColor: "rgba(75, 192, 192, 0.2)", // Warna area
-      borderColor: "rgba(75, 192, 192, 1)", // Warna garis tepi
-      borderWidth: 1,
+
+function updateTotalProfitAgeChart(ageGroupData) {
+  const chartId = 'TotalProfitAgeChart'
+  const ctx = document.getElementById(chartId).getContext('2d');
+  destroyChart(chartId)
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ageGroupData.countries,
+      datasets: [{
+        label: '# Profit',
+        data: ageGroupData.values,
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
+        ],
+        borderColor: [
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
+        ],
+        borderWidth: 1
+      }]
     },
-  ],
-};
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+function updateTotalProfitProductCategory(ProductCategoryData) {
+  const chartId = 'TotalProfitProductCategory'
+  const ctx = document.getElementById(chartId).getContext('2d');
+  destroyChart(chartId)
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ProductCategoryData.countries,
+      datasets: [{
+        label: '# Profit',
+        data: ProductCategoryData.values,
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// total profit in eropa grop by age
+// const age = document.getElementById("TotalProfitAgeChart").getContext("2d");
+// const umur = ["0-10", "11-20", "21-30", "31-40", "41-50"];
+// const data = {
+//   labels: umur,
+//   datasets: [
+//     {
+//       label: 'bar',
+//       data: [15, 25, 30, 20, 10], // Jumlah individu dalam setiap kelompok umur
+//       backgroundColor: "rgba(75, 192, 192, 0.2)", // Warna area
+//       borderColor: "rgba(75, 192, 192, 1)", // Warna garis tepi
+//       borderWidth: 1,
+//     },
+//   ],
+// };
 // Konfigurasi grafik area
 const config = {
-  type: "line",
+  type: 'bar',
   data: data,
   options: {
     scales: {
