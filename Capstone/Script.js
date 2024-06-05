@@ -122,15 +122,13 @@ async function main() {
     updateTotalProfitAgeChart(profitbyAgeGroup);
   }
 
-  // if (data2) {
-  //   // Transform data for the charts
-  //   const profitByCountry = getProfitByCountry(data2);
-  //   const genderDistribution = getGenderDistribution(data2);
+  if (data2) {
+    // Transform data for the charts
+    const profitByFrance = getProfitByFranceq3(data2);
 
-  //   // Update the charts with the transformed data
-  //   updateTotalProfitChart(profitByCountry);
-  //   updateTotalProfitGenderChart(genderDistribution);
-  // }
+    // Update the charts with the transformed data
+    
+  }
 }
 
 function getValueDisplayTprofit(data) {
@@ -214,6 +212,21 @@ function getProfitbyAgeGroup(data) {
   return {
     countries: Object.keys(profitbyAgeGroup),
     values: Object.values(profitbyAgeGroup)
+  };
+}
+
+function getProfitByFranceq3(data) {
+  const profitByCountry = {};
+  data.forEach(item => {
+    if (!profitByCountry[item.Country]) {
+      profitByCountry[item.Country] = 0;
+    }
+    profitByCountry[item.Country] += item.Profit;
+  });
+
+  return {
+    countries: Object.keys(profitByCountry),
+    values: Object.values(profitByCountry)
   };
 }
 
@@ -477,32 +490,36 @@ function updateTotalProfitProductCategory(ProductCategoryData) {
 const productChart = new Chart(ctxcategory, productConfig);
 
 // total profit data q3 q4 france
-const ctxfrance = document.getElementById("salesChart").getContext("2d");
-// Data penjualan bulanan
-const salesData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "Sales",
-      data: [1000, 1500, 1200, 1800, 2000, 1700, 1900], // Data penjualan per bulan
-      fill: false,
-      borderColor: "rgba(75, 192, 192, 1)", // Warna garis
-      borderWidth: 1,
-    },
-  ],
-};
-// Konfigurasi grafik garis
-const salesConfig = {
-  type: "line",
-  data: salesData,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
+function updateTotalProfitProductCategory(franceProfit) {
+  const chartId = 'ProfitByFrance'
+  const ctx = document.getElementById(chartId).getContext('2d');
+  destroyChart(chartId)
+  // Data penjualan bulanan
+  const salesData = {
+    labels: franceProfit.Month,
+    datasets: [
+      {
+        label: "Profit",
+        data: franceProfit.values , // Data penjualan per bulan
+        fill: false,
+        borderColor: "rgba(75, 192, 192, 1)", // Warna garis
+        borderWidth: 1,
+      },
+    ],
+  };
+  // Konfigurasi grafik garis
+  const salesConfig = {
+    type: "line",
+    data: salesData,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
       },
     },
-  },
-};
+  };
+}
 // Membuat grafik menggunakan konfigurasi yang telah ditentukan
 const salesChart = new Chart(ctxfrance, salesConfig);
 
