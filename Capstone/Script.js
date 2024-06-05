@@ -24,7 +24,7 @@ async function handleOnMonthFilter(element) {
   let displayProfit = getValueDisplayTprofit(filtered)
   // let displayQorder = getValueDisplayOrder(filtered)
   let profitbyAgeGroup = getProfitbyAgeGroup(filtered);
-  let profitbyProductCategory = getProfitProductCategory(data1);
+  let profitbyProductCategory = getProfitProductCategory(filtered);
   
   // update charts
   updateTotalProfitGenderChart(genderByDistribution)
@@ -51,7 +51,7 @@ async function handleOnYearFilter(element) {
   let displayProfit = getValueDisplayTprofit(filtered)
   // let displayQorder = getValueDisplayOrder(filtered)
   let profitbyAgeGroup = getProfitbyAgeGroup(filtered);
-  let profitbyProductCategory = getProfitProductCategory(data1);
+  let profitbyProductCategory = getProfitProductCategory(filtered);
   
 
   // update charts
@@ -485,7 +485,7 @@ function updateTotalProfitProductCategory(ProductCategoryData) {
   });
 }
 
-
+/*
 // Membuat grafik menggunakan konfigurasi yang telah ditentukan
 const productChart = new Chart(ctxcategory, productConfig);
 
@@ -713,4 +713,4 @@ const genderSalesConfig = {
 // Membuat grafik menggunakan konfigurasi yang telah ditentukan
 const genderSalesChart = new Chart(ctxGenderSalesChart, genderSalesConfig);
 
-
+*/
