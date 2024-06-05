@@ -22,12 +22,17 @@ async function handleOnMonthFilter(element) {
   let genderByDistribution = getGenderDistribution(filtered)
   let totalProfitbyCountry = getProfitByCountry(filtered)
   let displayProfit = getValueDisplayTprofit(filtered)
-  let displayQorder 
-  let displayLowestProfit
+  // let displayQorder = getValueDisplayOrder(filtered)
+  let profitbyAgeGroup = getProfitbyAgeGroup(filtered);
+  let profitbyProductCategory = getProfitProductCategory(data1);
+  
   // update charts
   updateTotalProfitGenderChart(genderByDistribution)
   updateTotalProfitChart(totalProfitbyCountry)
   updateValueDisplayTprofit(valueProfitDisplay,displayProfit)
+  // updateValueDisplayQorder(valueOrderQuantityDisplay,displayQorder)
+  updateTotalProfitProductCategory(profitbyProductCategory);
+  updateTotalProfitAgeChart(profitbyAgeGroup);
 }
 
 async function handleOnYearFilter(element) {
@@ -44,12 +49,18 @@ async function handleOnYearFilter(element) {
   let genderByDistribution = getGenderDistribution(filtered)
   let totalProfitbyCountry = getProfitByCountry(filtered)
   let displayProfit = getValueDisplayTprofit(filtered)
-  let displayQorder 
-  let displayLowestProfit
+  // let displayQorder = getValueDisplayOrder(filtered)
+  let profitbyAgeGroup = getProfitbyAgeGroup(filtered);
+  let profitbyProductCategory = getProfitProductCategory(data1);
+  
+
   // update charts
   updateTotalProfitChart(totalProfitbyCountry)
   updateTotalProfitGenderChart(genderByDistribution)
   updateValueDisplayTprofit(valueProfitDisplay,displayProfit)
+  // updateValueDisplayQorder(valueOrderQuantityDisplay,displayQorder)
+  updateTotalProfitProductCategory(profitbyProductCategory);
+    updateTotalProfitAgeChart(profitbyAgeGroup);
 }
 
 function filterDataBySelectedFilters(data) {
@@ -96,15 +107,19 @@ async function main() {
     // Transform data for the charts
     const profitByCountry = getProfitByCountry(data1);
     const genderDistribution = getGenderDistribution(data1);
-    const productCategory = getProductCategory(data1);
-    const valueElementProfit = getValueDisplayTprofit(data1);
+    const valueElementProfitc = getValueDisplayTprofit(data1);
+    // const valueQuantityOrderc = getValueDisplayOrder(data1);
+    const profitbyAgeGroup = getProfitbyAgeGroup(data1);
+    const profitbyProductCategory = getProfitProductCategory(data1);
 
-    // const ageGroup = getAgeGroup(data1);
 
     // Update the charts with the transformed data
     updateTotalProfitChart(profitByCountry);
     updateTotalProfitGenderChart(genderDistribution);
-    updateValueDisplayTprofit(valueProfitDisplay,valueElementProfit)
+    updateValueDisplayTprofit(valueProfitDisplay,valueElementProfitc)
+    // updateValueDisplayQorder(valueOrderQuantityDisplay,valueQuantityOrderc)
+    updateTotalProfitProductCategory(profitbyProductCategory);
+    updateTotalProfitAgeChart(profitbyAgeGroup);
   }
 
   // if (data2) {
@@ -187,7 +202,36 @@ function getAgeGroup(data) {
   return Object.values(genderDistribution);
 }
 
+function getProfitbyAgeGroup(data) {
+  const profitbyAgeGroup = {};
+  data.forEach(item => {
+    if (!profitbyAgeGroup[item.Age_Group]) {
+      profitbyAgeGroup[item.Age_Group] = 0;
+    }
+    profitbyAgeGroup[item.Age_Group] += item.Profit;
+  });
 
+  return {
+    countries: Object.keys(profitbyAgeGroup),
+    values: Object.values(profitbyAgeGroup)
+  };
+}
+
+
+function getProfitProductCategory(data) {
+  const profitbyProductCategory = {};
+  data.forEach(item => {
+    if (!profitbyProductCategory[item.Product_Category]) {
+      profitbyProductCategory[item.Product_Category] = 0;
+    }
+    profitbyProductCategory[item.Product_Category] += item.Profit;
+  });
+
+  return {
+    countries: Object.keys(profitbyProductCategory),
+    values: Object.values(profitbyProductCategory)
+  };
+}
 
 window.onload = main;
 
@@ -257,40 +301,6 @@ document
 // chart js <!-- section profit in eropa -->
 
 
-const tppcc = document.getElementById('TotalProfitPCategoryChart');
-// const tpgc = document.getElementById('TotalProfitGenderChart');
-
-      
-
-// new Chart(tpgc, {
-//   type: 'doughnut',
-//   data: {
-//     labels: ['M', 'F'],
-//     datasets: [{
-//       data: [52.5, 47.5],
-//       borderWidth: 1
-//     }]
-//   }
-// });
-
-new Chart(tppcc, {
-  type: 'bar',
-  data: {
-    labels: ['United States', 'Australia', 'United Kingdom'],
-    datasets: [{
-      label: 'Profit',
-      data: [6187169, 3991425, 2402989],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
 
 
 function updateValueDisplayTprofit(id,data) {
@@ -305,13 +315,15 @@ function updateValueDisplayTprofit(id,data) {
 
 function updateValueDisplayQorder(id,data) {
   id.textContent = 0;
-  let data1 = data / 1000000;  
-  const newValue = parseFloat(data1.toFixed(2)) + " M";
+  let data2 = data / 1000000;  
+  const newValue = parseFloat(data2.toFixed(2)) + " M";
     
   // Perbarui teks di elemen HTML
   id.textContent = newValue;
 
 }
+
+
 
 function updateTotalProfitChart(profitData) {
   const chartId = 'TotalProfitChart'
@@ -382,76 +394,85 @@ function updateTotalProfitGenderChart(genderData) {
 }
 
 // total profit in eropa grop by age
-const age = document.getElementById("age-Chart-eropa").getContext("2d");
-const umur = ["0-10", "11-20", "21-30", "31-40", "41-50"];
-const data = {
-  labels: umur,
-  datasets: [
-    {
-      label: "Age Distribution",
-      data: [15, 25, 30, 20, 10], // Jumlah individu dalam setiap kelompok umur
-      backgroundColor: "rgba(75, 192, 192, 0.2)", // Warna area
-      borderColor: "rgba(75, 192, 192, 1)", // Warna garis tepi
-      borderWidth: 1,
+function updateTotalProfitAgeChart(ageGroupData) {
+  const chartId = 'TotalProfitAgeChart'
+  const ctx = document.getElementById(chartId).getContext('2d');
+  destroyChart(chartId)
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ageGroupData.countries,
+      datasets: [{
+        label: '# Profit',
+        data: ageGroupData.values,
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
+        ],
+        borderColor: [
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
+        ],
+        borderWidth: 1
+      }]
     },
-  ],
-};
-// Konfigurasi grafik area
-const config = {
-  type: "line",
-  data: data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-};
-// Membuat grafik menggunakan konfigurasi yang telah ditentukan
-const ageChart = new Chart(age, config);
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+
 
 //
 
 // total profit in eropa grop by categry
-const ctxcategory = document
-  .getElementById("category-chart-eropa")
-  .getContext("2d");
-const productData = {
-  // Data penjualan produk berdasarkan kategori
-  labels: ["Accessories", "Bikes", "Clothing"],
-  datasets: [
-    {
-      label: "Sales by Category",
-      data: [10091084, 5898052, 2863409], // Jumlah penjualan dalam setiap kategori
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)", // Warna untuk Accessories
-        "rgba(54, 162, 235, 0.2)", // Warna untuk Bikes
-        "rgba(255, 205, 86, 0.2)", // Warna untuk Clothing
-  
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)", // Warna border untuk Accessories
-        "rgba(54, 162, 235, 1)", // Warna border untuk Bikes
-        "rgba(255, 205, 86, 1)", // Warna border untuk Clothing
-       
-      ],
-      borderWidth: 1,
+
+function updateTotalProfitProductCategory(ProductCategoryData) {
+  const chartId = 'TotalProfitProductCategory'
+  const ctx = document.getElementById(chartId).getContext('2d');
+  destroyChart(chartId)
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ProductCategoryData.countries,
+      datasets: [{
+        label: '# Profit',
+        data: ProductCategoryData.values,
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)'
+        ],
+        borderWidth: 1
+      }]
     },
-  ],
-};
-// Konfigurasi grafik bar
-const productConfig = {
-  type: "bar",
-  data: productData,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-};
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+
 // Membuat grafik menggunakan konfigurasi yang telah ditentukan
 const productChart = new Chart(ctxcategory, productConfig);
 
