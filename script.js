@@ -1,6 +1,6 @@
 
-let monthFilters = []
-let yearFilters = []
+let monthFilters = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+let yearFilters = ["-1", "2013", "2014", "2015", "2016"]
 
 const valueProfitDisplay = document.getElementById('displayTprofit');
 const valueOrderQuantityDisplay = document.getElementById('displayOquantity'); 
@@ -22,17 +22,29 @@ async function handleOnMonthFilter(element) {
   let genderByDistribution = getGenderDistribution(filtered)
   let totalProfitbyCountry = getProfitByCountry(filtered)
   let displayProfit = getValueDisplayTprofit(filtered)
-  // let displayQorder = getValueDisplayOrder(filtered)
+  let valueQuantityOrderc = getValueDisplayOrder(filtered);
+  let valueProfitLowestCountry = getValueProfitLowestCountry(filtered);
   let profitbyAgeGroup = getProfitbyAgeGroup(filtered);
-  let profitbyProductCategory = getProfitProductCategory(data1);
-  
+  let profitbyProductCategory = getProfitProductCategory(filtered);
+
+ // crot data 2
+ let profitByFrance = getProfitByFrance(filtered)
+ let profitBySubCategoryFrance = getProfitBySubCategoryFrance(filtered);
+ let profitbyProductCategoryinFrance = getProfitProductCategoryInFrance(filtered);
+
   // update charts
   updateTotalProfitGenderChart(genderByDistribution)
   updateTotalProfitChart(totalProfitbyCountry)
   updateValueDisplayTprofit(valueProfitDisplay,displayProfit)
-  // updateValueDisplayQorder(valueOrderQuantityDisplay,displayQorder)
+  updateValueDisplayQorder(valueOrderQuantityDisplay,valueQuantityOrderc)
+  updateValueProfitLowestCountry(lowestCountryDisplay, valueProfitLowestCountry)
   updateTotalProfitProductCategory(profitbyProductCategory);
   updateTotalProfitAgeChart(profitbyAgeGroup);
+
+  // update chart data 2
+  updateProfitByFrance(profitByFrance)
+  updateProfitBySubCategoryFrance(profitBySubCategoryFrance);
+  updateProfitByProductCategoryinFrance(profitbyProductCategoryinFrance );
 }
 
 async function handleOnYearFilter(element) {
@@ -48,19 +60,31 @@ async function handleOnYearFilter(element) {
   // group by
   let genderByDistribution = getGenderDistribution(filtered)
   let totalProfitbyCountry = getProfitByCountry(filtered)
+  let valueQuantityOrderc = getValueDisplayOrder(filtered);
+  let valueProfitLowestCountry = getValueProfitLowestCountry(filtered);
   let displayProfit = getValueDisplayTprofit(filtered)
-  // let displayQorder = getValueDisplayOrder(filtered)
   let profitbyAgeGroup = getProfitbyAgeGroup(filtered);
-  let profitbyProductCategory = getProfitProductCategory(data1);
+  let profitbyProductCategory = getProfitProductCategory(filtered);
+
+  // crot data 2
+  let profitByFrance = getProfitByFrance(filtered);
+  let profitBySubCategoryFrance = getProfitBySubCategoryFrance(filtered);
+  let profitbyProductCategoryinFrance = getProfitProductCategoryInFrance(filtered);
   
 
   // update charts
   updateTotalProfitChart(totalProfitbyCountry)
   updateTotalProfitGenderChart(genderByDistribution)
   updateValueDisplayTprofit(valueProfitDisplay,displayProfit)
-  // updateValueDisplayQorder(valueOrderQuantityDisplay,displayQorder)
+  updateValueDisplayQorder(valueOrderQuantityDisplay,valueQuantityOrderc)
+  updateValueProfitLowestCountry(lowestCountryDisplay, valueProfitLowestCountry)
   updateTotalProfitProductCategory(profitbyProductCategory);
-    updateTotalProfitAgeChart(profitbyAgeGroup);
+  updateTotalProfitAgeChart(profitbyAgeGroup);
+
+  // crot data 2
+  updateProfitByFrance(profitByFrance);
+  updateProfitBySubCategoryFrance(profitBySubCategoryFrance);
+  updateProfitByProductCategoryinFrance(profitbyProductCategoryinFrance);
 }
 
 function filterDataBySelectedFilters(data) {
@@ -74,12 +98,13 @@ function filterDataBySelectedFilters(data) {
 
 function updateFilter(element, currentFilters) {
   let filterValue = element.value
-  if (element.checked) {
-      currentFilters.push(filterValue)
-      return currentFilters
+  console.log(currentFilters)
+  if (!element.checked) {
+      return currentFilters.filter(item => item !== filterValue)
+  } else {
+    currentFilters.push(filterValue)
+    return currentFilters
   }
-
-  return currentFilters.filter(item => item !== filterValue)
 }
 
 async function loadFranceJSON() {
@@ -101,14 +126,13 @@ async function main() {
   const data1 = await loadAllJSON();
   const data2 = await loadFranceJSON();
 
-  
-
   if (data1) {
     // Transform data for the charts
     const profitByCountry = getProfitByCountry(data1);
     const genderDistribution = getGenderDistribution(data1);
     const valueElementProfitc = getValueDisplayTprofit(data1);
-    // const valueQuantityOrderc = getValueDisplayOrder(data1);
+    const valueQuantityOrderc = getValueDisplayOrder(data1);
+    const valueProfitLowestCountry = getValueProfitLowestCountry(data1);
     const profitbyAgeGroup = getProfitbyAgeGroup(data1);
     const profitbyProductCategory = getProfitProductCategory(data1);
 
@@ -117,20 +141,28 @@ async function main() {
     updateTotalProfitChart(profitByCountry);
     updateTotalProfitGenderChart(genderDistribution);
     updateValueDisplayTprofit(valueProfitDisplay,valueElementProfitc)
-    // updateValueDisplayQorder(valueOrderQuantityDisplay,valueQuantityOrderc)
+    updateValueDisplayQorder(valueOrderQuantityDisplay,valueQuantityOrderc)
+    updateValueProfitLowestCountry(lowestCountryDisplay, valueProfitLowestCountry)
     updateTotalProfitProductCategory(profitbyProductCategory);
     updateTotalProfitAgeChart(profitbyAgeGroup);
   }
 
   if (data2) {
     // Transform data for the charts
-    const profitByFrance = getProfitByFranceq3(data2);
+    const profitByFrance = getProfitByFrance(data2);
+    const profitBySubCategoryFrance = getProfitBySubCategoryFrance(data2);
+    const profitbyProductCategoryinFrance = getProfitProductCategoryInFrance(data2);
 
-    // Update the charts with the transformed data
-    
+
+    // Update the France-specific chart
+    updateProfitByFrance(profitByFrance);
+    updateProfitBySubCategoryFrance(profitBySubCategoryFrance)
+    updateProfitByProductCategoryinFrance(profitbyProductCategoryinFrance);
+
   }
 }
 
+// main data 1
 function getValueDisplayTprofit(data) {
   let displayProfitValue = 0;
   const profitByCountry = {};
@@ -143,20 +175,36 @@ function getValueDisplayTprofit(data) {
 
   return displayProfitValue;
 }
-
 function getValueDisplayOrder(data) {
-  let displayOrder = 0;
+  return data.reduce((sum, item) => item["Order_Quantity"] + sum, 0)
+}
+function getValueProfitLowestCountry(data) {
   const profitByCountry = {};
+
+  // Iterate through the data array and accumulate the profits by country
   data.forEach(item => {
-    if (!profitByCountry[item.Country]) {
-      profitByCountry[item.Country] = 0;
+    const country = item.Country;
+    const profit = item.Profit;
+
+    if (!profitByCountry[country]) {
+      profitByCountry[country] = 0;
     }
-    displayProfitValue += item.Order_Quantity;
+    profitByCountry[country] += profit;
   });
 
-  return displayOrder;
-}
+  // Find the country with the lowest total profit
+  let lowestProfitCountry = null;
+  let lowestProfit = Infinity;
 
+  for (const country in profitByCountry) {
+    if (profitByCountry[country] < lowestProfit) {
+      lowestProfit = profitByCountry[country];
+      lowestProfitCountry = country;
+    }
+  }
+
+  return lowestProfit === Infinity ? 0 : lowestProfit;
+}
 function getProfitByCountry(data) {
   const profitByCountry = {};
   data.forEach(item => {
@@ -171,35 +219,6 @@ function getProfitByCountry(data) {
     values: Object.values(profitByCountry)
   };
 }
-
-function getProductCategory(data) {
-  const ProductCategory = { Accessories: 0, Bikes: 0 , Clothing: 0};
-  data.forEach(item => {
-    if (item.Product_Category in ProductCategory) {
-      ProductCategory[item.Product_Category] += 1;
-    }
-  });
-
-  return Object.values(ProductCategory);
-}
-
-function getGenderDistribution(data) {
-  const genderDistribution = { M: 0, F: 0 };
-  data.forEach(item => {
-    if (item.Customer_Gender in genderDistribution) {
-      genderDistribution[item.Customer_Gender] += 1;
-    }
-  });
-
-  return Object.values(genderDistribution);
-}
-
-function getAgeGroup(data) {
-  
-
-  return Object.values(genderDistribution);
-}
-
 function getProfitbyAgeGroup(data) {
   const profitbyAgeGroup = {};
   data.forEach(item => {
@@ -214,23 +233,16 @@ function getProfitbyAgeGroup(data) {
     values: Object.values(profitbyAgeGroup)
   };
 }
-
-function getProfitByFranceq3(data) {
-  const profitByCountry = {};
+function getGenderDistribution(data) {
+  const genderDistribution = { M: 0, F: 0 };
   data.forEach(item => {
-    if (!profitByCountry[item.Country]) {
-      profitByCountry[item.Country] = 0;
+    if (item.Customer_Gender in genderDistribution) {
+      genderDistribution[item.Customer_Gender] += 1;
     }
-    profitByCountry[item.Country] += item.Profit;
   });
 
-  return {
-    countries: Object.keys(profitByCountry),
-    values: Object.values(profitByCountry)
-  };
+  return Object.values(genderDistribution);
 }
-
-
 function getProfitProductCategory(data) {
   const profitbyProductCategory = {};
   data.forEach(item => {
@@ -245,6 +257,53 @@ function getProfitProductCategory(data) {
     values: Object.values(profitbyProductCategory)
   };
 }
+
+// main data 2
+function getProfitByFrance(data) {
+  const profitByMonth = {};
+  data.forEach((item) => {
+    if (item.Country === "France" && (item.Month === "July" || item.Month === "August" || item.Month === "September" || item.Month === "October" || item.Month === "November" || item.Month === "December")) {
+      if (!profitByMonth[item.Month]) {
+        profitByMonth[item.Month] = 0;
+      }
+      profitByMonth[item.Month] += item.Profit;
+    }
+  });
+
+  return {
+    countries: Object.keys(profitByMonth), // Menggunakan bulan sebagai label
+    values: Object.values(profitByMonth),
+  };
+}
+function getProfitBySubCategoryFrance(data) {
+  const profitBySubCategoryFrance = {};
+  data.forEach(item => {
+    if (!profitBySubCategoryFrance[item.Sub_Category]) {
+      profitBySubCategoryFrance[item.Sub_Category] = 0;
+    }
+    profitBySubCategoryFrance[item.Sub_Category] += item.Profit;
+  });
+
+  return {
+    countries: Object.keys(profitBySubCategoryFrance),
+    values: Object.values(profitBySubCategoryFrance)
+  };
+}
+function getProfitProductCategoryInFrance(data) {
+  const profitbyProductCategoryinFrance = {};
+  data.forEach(item => {
+    if (!profitbyProductCategoryinFrance[item.Product_Category]) {
+      profitbyProductCategoryinFrance[item.Product_Category] = 0;
+    }
+    profitbyProductCategoryinFrance[item.Product_Category] += item.Profit;
+  });
+
+  return {
+    countries: Object.keys(profitbyProductCategoryinFrance),
+    values: Object.values(profitbyProductCategoryinFrance)
+  };
+}
+
 
 window.onload = main;
 
@@ -266,7 +325,6 @@ function getCheckboxValuesMonth() {
   console.log('Checked values:', checkedValues);
   alert('Checked values: ' + checkedValues.join(', '));
 }
-
 function getCheckboxValuesYear() {
   // Get all checkbox elements with the class 'myCheckbox'
   const checkboxes = document.querySelectorAll('.myCheckboxYear');
@@ -287,7 +345,7 @@ function getCheckboxValuesYear() {
 }
 
 
-
+// dropdown month
 document
   .getElementById("toggleDropdownbulan")
   .addEventListener("click", function () {
@@ -311,11 +369,15 @@ document
     }
   });
 
-// chart js <!-- section profit in eropa -->
 
 
-
-
+function destroyChart(chartId) {
+  let chartStatus = Chart.getChart(chartId);
+    if (chartStatus !== undefined) {
+        chartStatus.destroy()
+    }
+}
+// update data 1
 function updateValueDisplayTprofit(id,data) {
   id.textContent = 0;
   let data1 = data / 1000000;  
@@ -325,7 +387,6 @@ function updateValueDisplayTprofit(id,data) {
   id.textContent = newValue;
 
 }
-
 function updateValueDisplayQorder(id,data) {
   id.textContent = 0;
   let data2 = data / 1000000;  
@@ -335,8 +396,10 @@ function updateValueDisplayQorder(id,data) {
   id.textContent = newValue;
 
 }
-
-
+function updateValueProfitLowestCountry(id, data) {
+    const val = data / 1000000;
+    id.textContent = val.toFixed(2) +  " M €";
+}
 
 function updateTotalProfitChart(profitData) {
   const chartId = 'TotalProfitChart'
@@ -345,6 +408,7 @@ function updateTotalProfitChart(profitData) {
 
   new Chart(ctx, {
     type: 'bar',
+    aspectRatio: 0.1,
     data: {
       labels: profitData.countries,
       datasets: [{
@@ -373,40 +437,15 @@ function updateTotalProfitChart(profitData) {
     },
     options: {
       indexAxis: 'y',
+      aspectRatio: 4.3,
       scales: {
         y: {
-          beginAtZero: true
-        }
+          beginAtZero: true,
+        },
       }
     }
   });
 }
-
-function destroyChart(chartId) {
-  let chartStatus = Chart.getChart(chartId);
-    if (chartStatus !== undefined) {
-        chartStatus.destroy()
-    }
-}
-
-function updateTotalProfitGenderChart(genderData) {
-  const chartId = 'TotalProfitGenderChart'
-  destroyChart(chartId)
-
-  const ctx = document.getElementById(chartId).getContext('2d');
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['M', 'F'],
-      datasets: [{
-        data: genderData,
-        borderWidth: 1
-      }]
-    }
-  });
-}
-
-// total profit in eropa grop by age
 function updateTotalProfitAgeChart(ageGroupData) {
   const chartId = 'TotalProfitAgeChart'
   const ctx = document.getElementById(chartId).getContext('2d');
@@ -414,6 +453,7 @@ function updateTotalProfitAgeChart(ageGroupData) {
 
   new Chart(ctx, {
     type: 'bar',
+    aspectRatio: 0.1,
     data: {
       labels: ageGroupData.countries,
       datasets: [{
@@ -435,6 +475,7 @@ function updateTotalProfitAgeChart(ageGroupData) {
       }]
     },
     options: {
+      aspectRatio: 1.7,
       scales: {
         y: {
           beginAtZero: true
@@ -443,13 +484,26 @@ function updateTotalProfitAgeChart(ageGroupData) {
     }
   });
 }
+function updateTotalProfitGenderChart(genderData) {
+  const chartId = 'TotalProfitGenderChart'
+  destroyChart(chartId)
 
-
-
-//
-
-// total profit in eropa grop by categry
-
+  const ctx = document.getElementById(chartId).getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    aspectRatio: 0.1,
+    data: {
+      labels: ['M', 'F'],
+      datasets: [{
+        data: genderData,
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      aspectRatio: 1.5, // Anda dapat mengubah nilai ini untuk mendapatkan ukuran yang diinginkan
+    }
+  }); 
+}
 function updateTotalProfitProductCategory(ProductCategoryData) {
   const chartId = 'TotalProfitProductCategory'
   const ctx = document.getElementById(chartId).getContext('2d');
@@ -476,6 +530,134 @@ function updateTotalProfitProductCategory(ProductCategoryData) {
       }]
     },
     options: {
+      aspectRatio: 1.7,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+// update data 2
+function updateProfitByFrance(profitData) {
+  const chartId = "ProfitByFrance";
+  const ctx = document.getElementById(chartId).getContext("2d");
+  destroyChart(chartId);
+
+  new Chart(ctx, {
+    type: "line", 
+    aspectRatio: 2.1,// Ubah tipe chart menjadi line chart
+    data: {
+      labels: profitData.countries, // Hilangkan slice karena kita memerlukan semua bulan
+      datasets: [
+        {
+          label: "Total Profit Q3 & Q4 in France", // Tambahkan label untuk perubahan profit
+          data: profitData.values, // Gunakan data perubahan profit
+          borderColor: "rgba(153, 102, 255, 1)", // Warna garis
+          backgroundColor: "rgba(153, 102, 255, 0.2)", // Warna area bawah garis
+          borderWidth: 1,
+          fill: false,
+          lineTension: 0.1,
+        },
+      ],
+    },
+    options: {
+      aspectRatio: 2.3,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+function updateProfitBySubCategoryFrance(SubCategoryFranceData) {
+  const chartId = 'ProfitBySubCategoryFrance'
+  const ctx = document.getElementById(chartId).getContext('2d');
+  destroyChart(chartId)
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: SubCategoryFranceData.countries,
+      datasets: [{
+        label: '# Profit',
+        data: SubCategoryFranceData.values,
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)',
+          'rgb(54, 162, 235)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      aspectRatio: 2.3,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+function  updateProfitByProductCategoryinFrance(ProductCategoryinFranceData) {
+  const chartId = 'ProfitByProductCategoryinFrance'
+  const ctx = document.getElementById(chartId).getContext('2d');
+  destroyChart(chartId)
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ProductCategoryinFranceData.countries,
+      datasets: [{
+        label: '# Profit',
+        data: ProductCategoryinFranceData.values,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 99, 132)',
+          'rgb(255, 99, 132)',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      aspectRatio: 2.3,
       scales: {
         y: {
           beginAtZero: true
@@ -486,195 +668,9 @@ function updateTotalProfitProductCategory(ProductCategoryData) {
 }
 
 
-// Membuat grafik menggunakan konfigurasi yang telah ditentukan
-const productChart = new Chart(ctxcategory, productConfig);
-
-// total profit data q3 q4 france
-function updateTotalProfitProductCategory(franceProfit) {
-  const chartId = 'ProfitByFrance'
-  const ctx = document.getElementById(chartId).getContext('2d');
-  destroyChart(chartId)
-  // Data penjualan bulanan
-  const salesData = {
-    labels: franceProfit.Month,
-    datasets: [
-      {
-        label: "Profit",
-        data: franceProfit.values , // Data penjualan per bulan
-        fill: false,
-        borderColor: "rgba(75, 192, 192, 1)", // Warna garis
-        borderWidth: 1,
-      },
-    ],
-  };
-  // Konfigurasi grafik garis
-  const salesConfig = {
-    type: "line",
-    data: salesData,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  };
-}
-// Membuat grafik menggunakan konfigurasi yang telah ditentukan
-const salesChart = new Chart(ctxfrance, salesConfig);
-
-// Total Profit by Sub Category Q3 & Q4 In France
-const ctxPSC = document.getElementById("productSalesChart").getContext("2d");
-const sDfrance = {
-  // Data penjualan produk
-  labels: [
-    "Tires and Tubes",
-    "Road Bikes",
-    "Touring Bikes",
-    "Jerseys",
-    "Bottles and Cages",
-    "Hydration Packs",
-    "Shorts",
-    "Gloves",
-    "Mountain Bikes",
-    "Fenders",
-    "Vests",
-    "Bike Stands",
-    "Bike Racks",
-    "Caps",
-    "Cleaners",
-    "Socks",
-  ],
-  datasets: [
-    {
-      label: "Product Sales",
-      data: [
-        1500, 1200, 800, 1000, 600, 400, 1100, 900, 700, 500, 300, 200, 400,
-        300, 200, 100,
-      ], // Data penjualan untuk setiap produk
-      backgroundColor: "rgba(75, 192, 192, 0.2)", // Warna area di dalam batang
-      borderColor: "rgba(75, 192, 192, 1)", // Warna border batang
-      borderWidth: 1,
-    },
-  ],
-};
-
-// Konfigurasi grafik batang
-const sFfrance = {
-  type: "bar",
-  data: sDfrance,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-};
-
-// Membuat grafik menggunakan konfigurasi yang telah ditentukan
-const salesCt = new Chart(ctxPSC, sFfrance);
-
-// Profit age group by product category Q3 & Q4 in France
-const ctxq3q4france = document
-  .getElementById("salesChartq3q4")
-  .getContext("2d");
-// Data penjualan berdasarkan kategori dan kelompok umur
-const salesDataq3q4 = {
-  labels: ["Accessories", "Bikes", "Clothing"],
-  datasets: [
-    {
-      label: "Adults (35-64)",
-      data: [500, 800, 600], // Data penjualan untuk kelompok umur Adults (35-64)
-      backgroundColor: "rgba(255, 99, 132, 0.2)", // Warna area di dalam batang
-      borderColor: "rgba(255, 99, 132, 1)", // Warna border batang
-      borderWidth: 1,
-    },
-    {
-      label: "Young Adults (25-34)",
-      data: [300, 700, 400], // Data penjualan untuk kelompok umur Young Adults (25-34)
-      backgroundColor: "rgba(54, 162, 235, 0.2)", // Warna area di dalam batang
-      borderColor: "rgba(54, 162, 235, 1)", // Warna border batang
-      borderWidth: 1,
-    },
-    {
-      label: "Youth (<25)",
-      data: [200, 500, 300], // Data penjualan untuk kelompok umur Youth (<25)
-      backgroundColor: "rgba(255, 205, 86, 0.2)", // Warna area di dalam batang
-      borderColor: "rgba(255, 205, 86, 1)", // Warna border batang
-      borderWidth: 1,
-    },
-    {
-      label: "Seniors (64+)",
-      data: [100, 300, 200], // Data penjualan untuk kelompok umur Seniors (64+)
-      backgroundColor: "rgba(75, 192, 192, 0.2)", // Warna area di dalam batang
-      borderColor: "rgba(75, 192, 192, 1)", // Warna border batang
-      borderWidth: 1,
-    },
-  ],
-};
-
-// Konfigurasi grafik batang
-const salesConfigq3q4 = {
-  type: "bar",
-  data: salesDataq3q4,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-};
-// Membuat grafik menggunakan konfigurasi yang telah ditentukan
-const salesChartq3q4 = new Chart(ctxq3q4france, salesConfigq3q4);
-
-// Total Profit By product category Q3 & Q4 in France
-const ctxProductSalesChart = document
-  .getElementById("psfranceq3q4")
-  .getContext("2d");
-// Data penjualan untuk kategori Accessories, Bikes, dan Clothing
-const productSalesData = {
-  labels: ["Accessories", "Bikes", "Clothing"],
-  datasets: [
-    {
-      label: "Product Sales",
-      data: [1500, 1200, 800], // Data penjualan untuk setiap kategori
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)", // Warna area di dalam batang untuk Accessories
-        "rgba(54, 162, 235, 0.2)", // Warna area di dalam batang untuk Bikes
-        "rgba(255, 205, 86, 0.2)", // Warna area di dalam batang untuk Clothing
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)", // Warna border batang untuk Accessories
-        "rgba(54, 162, 235, 1)", // Warna border batang untuk Bikes
-        "rgba(255, 205, 86, 1)", // Warna border batang untuk Clothing
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
-
-// Konfigurasi grafik batang
-const productSalesConfig = {
-  type: "bar",
-  data: productSalesData,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true, // Mulai sumbu y dari 0
-      },
-    },
-  },
-};
-// Membuat grafik menggunakan konfigurasi yang telah ditentukan
-const productSalesChart = new Chart(ctxProductSalesChart, productSalesConfig);
-
 // Total Profit customer gender By product category Q3 & Q4 in France
 // Konteks dari elemen canvas
-const ctxGenderSalesChart = document
-  .getElementById("genderSCq3q4")
-  .getContext("2d");
+const ctxGenderSalesChart = document.getElementById("ProfitCustomerGenderByProductCategory").getContext("2d");
 
 // Data penjualan untuk kategori Accessories, Bikes, dan Clothing berdasarkan jenis kelamin
 const genderSalesData = {
@@ -696,7 +692,6 @@ const genderSalesData = {
     },
   ],
 };
-
 // Konfigurasi grafik batang
 const genderSalesConfig = {
   type: "bar",
@@ -712,5 +707,4 @@ const genderSalesConfig = {
 
 // Membuat grafik menggunakan konfigurasi yang telah ditentukan
 const genderSalesChart = new Chart(ctxGenderSalesChart, genderSalesConfig);
-
 
