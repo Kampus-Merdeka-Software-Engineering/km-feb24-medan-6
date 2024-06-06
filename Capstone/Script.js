@@ -1,38 +1,41 @@
+let monthFilters = [];
+let yearFilters = [];
 
-let monthFilters = []
-let yearFilters = []
-
-const valueProfitDisplay = document.getElementById('displayTprofit');
-const valueOrderQuantityDisplay = document.getElementById('displayOquantity'); 
-const lowestCountryDisplay = document.getElementById('displayLcountry');
-
-
+const valueProfitDisplay = document.getElementById("displayTprofit");
+const valueOrderQuantityDisplay = document.getElementById("displayOquantity");
+const lowestCountryDisplay = document.getElementById("displayLcountry");
 
 async function handleOnMonthFilter(element) {
   const allData = await loadAllJSON();
   const franceData = await loadFranceJSON();
 
   // update current filters
-  monthFilters = updateFilter(element, monthFilters)
+  monthFilters = updateFilter(element, monthFilters);
 
   // filter
-  let filtered = filterDataBySelectedFilters(allData)
-  let filteredFrance = filterDataBySelectedFilters(franceData)
+  let filtered = filterDataBySelectedFilters(allData);
+  let filteredFrance = filterDataBySelectedFilters(franceData);
   // group by
-  let genderByDistribution = getGenderDistribution(filtered)
-  let totalProfitbyCountry = getProfitByCountry(filtered)
-  let displayProfit = getValueDisplayTprofit(filtered)
+  let genderByDistribution = getGenderDistribution(filtered);
+  let totalProfitbyCountry = getProfitByCountry(filtered);
+  let displayProfit = getValueDisplayTprofit(filtered);
   // let displayQorder = getValueDisplayOrder(filtered)
   let profitbyAgeGroup = getProfitbyAgeGroup(filtered);
   let profitbyProductCategory = getProfitProductCategory(filtered);
-  
+  // crot data 2
+  let profitByFrance = getProfitByFrance(filtered);
+  let profitBySubCategoryFrance = getProfitBySubCategoryFrance(filtered);
+
   // update charts
-  updateTotalProfitGenderChart(genderByDistribution)
-  updateTotalProfitChart(totalProfitbyCountry)
-  updateValueDisplayTprofit(valueProfitDisplay,displayProfit)
+  updateTotalProfitGenderChart(genderByDistribution);
+  updateTotalProfitChart(totalProfitbyCountry);
+  updateValueDisplayTprofit(valueProfitDisplay, displayProfit);
   // updateValueDisplayQorder(valueOrderQuantityDisplay,displayQorder)
   updateTotalProfitProductCategory(profitbyProductCategory);
   updateTotalProfitAgeChart(profitbyAgeGroup);
+  // crot data 2
+  updateProfitByFrance(profitByFrance);
+  updateProfitBySubCategoryFrance(profitBySubCategoryFrance);
 }
 
 async function handleOnYearFilter(element) {
@@ -40,68 +43,70 @@ async function handleOnYearFilter(element) {
   const franceData = await loadFranceJSON();
 
   // update current filters
-  yearFilters = updateFilter(element, yearFilters)
+  yearFilters = updateFilter(element, yearFilters);
 
   // filter
-  let filtered = filterDataBySelectedFilters(allData)
-  let filteredFrance = filterDataBySelectedFilters(franceData)
+  let filtered = filterDataBySelectedFilters(allData);
+  let filteredFrance = filterDataBySelectedFilters(franceData);
   // group by
-  let genderByDistribution = getGenderDistribution(filtered)
-  let totalProfitbyCountry = getProfitByCountry(filtered)
-  let displayProfit = getValueDisplayTprofit(filtered)
+  let genderByDistribution = getGenderDistribution(filtered);
+  let totalProfitbyCountry = getProfitByCountry(filtered);
+  let displayProfit = getValueDisplayTprofit(filtered);
   // let displayQorder = getValueDisplayOrder(filtered)
   let profitbyAgeGroup = getProfitbyAgeGroup(filtered);
   let profitbyProductCategory = getProfitProductCategory(filtered);
-  
+  // crot data 2
+  let profitByFrance = getProfitByFrance(filtered);
+  let profitBySubCategoryFrance = getProfitBySubCategoryFrance(filtered);
 
   // update charts
-  updateTotalProfitChart(totalProfitbyCountry)
-  updateTotalProfitGenderChart(genderByDistribution)
-  updateValueDisplayTprofit(valueProfitDisplay,displayProfit)
+  updateTotalProfitChart(totalProfitbyCountry);
+  updateTotalProfitGenderChart(genderByDistribution);
+  updateValueDisplayTprofit(valueProfitDisplay, displayProfit);
   // updateValueDisplayQorder(valueOrderQuantityDisplay,displayQorder)
   updateTotalProfitProductCategory(profitbyProductCategory);
-    updateTotalProfitAgeChart(profitbyAgeGroup);
+  updateTotalProfitAgeChart(profitbyAgeGroup);
+  // crot data 2
+  updateProfitByFrance(profitByFrance);
+  updateProfitBySubCategoryFrance(profitBySubCategoryFrance);
 }
 
 function filterDataBySelectedFilters(data) {
-  return data.filter((salesData => {
-    let selectedMonth = monthFilters.length == 0 ? true : monthFilters.includes(salesData['Month'])
-    let selectedYear = yearFilters.length == 0 ? true : yearFilters.includes(salesData['Year'].toString())
+  return data.filter((salesData) => {
+    let selectedMonth = monthFilters.length == 0 ? true : monthFilters.includes(salesData["Month"]);
+    let selectedYear = yearFilters.length == 0 ? true : yearFilters.includes(salesData["Year"].toString());
 
-    return selectedMonth && selectedYear
-  }))
+    return selectedMonth && selectedYear;
+  });
 }
 
 function updateFilter(element, currentFilters) {
-  let filterValue = element.value
+  let filterValue = element.value;
   if (element.checked) {
-      currentFilters.push(filterValue)
-      return currentFilters
+    currentFilters.push(filterValue);
+    return currentFilters;
   }
 
-  return currentFilters.filter(item => item !== filterValue)
+  return currentFilters.filter((item) => item !== filterValue);
 }
 
 async function loadFranceJSON() {
-  const response = await fetch('data_france.json');
+  const response = await fetch("data_france.json");
   const data = await response.json();
 
   return data;
 }
 
 async function loadAllJSON() {
-  const response = await fetch('data_blmcleaning.json');
+  const response = await fetch("data_blmcleaning.json");
   const data = await response.json();
-  
+
   return data;
 }
-
 
 async function main() {
   const data1 = await loadAllJSON();
   const data2 = await loadFranceJSON();
-
-  
 
   if (data1) {
     // Transform data for the charts
@@ -112,29 +117,30 @@ async function main() {
     const profitbyAgeGroup = getProfitbyAgeGroup(data1);
     const profitbyProductCategory = getProfitProductCategory(data1);
 
-
     // Update the charts with the transformed data
     updateTotalProfitChart(profitByCountry);
     updateTotalProfitGenderChart(genderDistribution);
-    updateValueDisplayTprofit(valueProfitDisplay,valueElementProfitc)
+    updateValueDisplayTprofit(valueProfitDisplay, valueElementProfitc);
     // updateValueDisplayQorder(valueOrderQuantityDisplay,valueQuantityOrderc)
     updateTotalProfitProductCategory(profitbyProductCategory);
     updateTotalProfitAgeChart(profitbyAgeGroup);
   }
 
   if (data2) {
-    // Transform data for the charts
-    const profitByFrance = getProfitByFranceq3(data2);
+    // Transform data for the France-specific charts
+    const profitByFrance = getProfitByFrance(data2);
+    const profitBySubCategoryFrance = getProfitBySubCategoryFrance(data2);
 
-    // Update the charts with the transformed data
-    
+    // Update the France-specific charts
+    updateProfitByFrance(profitByFrance);
+    updateProfitBySubCategoryFrance(profitBySubCategoryFrance);
   }
 }
 
 function getValueDisplayTprofit(data) {
   let displayProfitValue = 0;
   const profitByCountry = {};
-  data.forEach(item => {
+  data.forEach((item) => {
     if (!profitByCountry[item.Country]) {
       profitByCountry[item.Country] = 0;
     }
@@ -147,7 +153,7 @@ function getValueDisplayTprofit(data) {
 function getValueDisplayOrder(data) {
   let displayOrder = 0;
   const profitByCountry = {};
-  data.forEach(item => {
+  data.forEach((item) => {
     if (!profitByCountry[item.Country]) {
       profitByCountry[item.Country] = 0;
     }
@@ -159,7 +165,7 @@ function getValueDisplayOrder(data) {
 
 function getProfitByCountry(data) {
   const profitByCountry = {};
-  data.forEach(item => {
+  data.forEach((item) => {
     if (!profitByCountry[item.Country]) {
       profitByCountry[item.Country] = 0;
     }
@@ -168,13 +174,13 @@ function getProfitByCountry(data) {
 
   return {
     countries: Object.keys(profitByCountry),
-    values: Object.values(profitByCountry)
+    values: Object.values(profitByCountry),
   };
 }
 
 function getProductCategory(data) {
-  const ProductCategory = { Accessories: 0, Bikes: 0 , Clothing: 0};
-  data.forEach(item => {
+  const ProductCategory = { Accessories: 0, Bikes: 0, Clothing: 0 };
+  data.forEach((item) => {
     if (item.Product_Category in ProductCategory) {
       ProductCategory[item.Product_Category] += 1;
     }
@@ -185,7 +191,7 @@ function getProductCategory(data) {
 
 function getGenderDistribution(data) {
   const genderDistribution = { M: 0, F: 0 };
-  data.forEach(item => {
+  data.forEach((item) => {
     if (item.Customer_Gender in genderDistribution) {
       genderDistribution[item.Customer_Gender] += 1;
     }
@@ -195,14 +201,12 @@ function getGenderDistribution(data) {
 }
 
 function getAgeGroup(data) {
-  
-
   return Object.values(genderDistribution);
 }
 
 function getProfitbyAgeGroup(data) {
   const profitbyAgeGroup = {};
-  data.forEach(item => {
+  data.forEach((item) => {
     if (!profitbyAgeGroup[item.Age_Group]) {
       profitbyAgeGroup[item.Age_Group] = 0;
     }
@@ -211,13 +215,13 @@ function getProfitbyAgeGroup(data) {
 
   return {
     countries: Object.keys(profitbyAgeGroup),
-    values: Object.values(profitbyAgeGroup)
+    values: Object.values(profitbyAgeGroup),
   };
 }
 
 function getProfitByFranceq3(data) {
   const profitByCountry = {};
-  data.forEach(item => {
+  data.forEach((item) => {
     if (!profitByCountry[item.Country]) {
       profitByCountry[item.Country] = 0;
     }
@@ -226,14 +230,13 @@ function getProfitByFranceq3(data) {
 
   return {
     countries: Object.keys(profitByCountry),
-    values: Object.values(profitByCountry)
+    values: Object.values(profitByCountry),
   };
 }
 
-
 function getProfitProductCategory(data) {
   const profitbyProductCategory = {};
-  data.forEach(item => {
+  data.forEach((item) => {
     if (!profitbyProductCategory[item.Product_Category]) {
       profitbyProductCategory[item.Product_Category] = 0;
     }
@@ -242,7 +245,41 @@ function getProfitProductCategory(data) {
 
   return {
     countries: Object.keys(profitbyProductCategory),
-    values: Object.values(profitbyProductCategory)
+    values: Object.values(profitbyProductCategory),
+  };
+}
+
+function getProfitByFrance(data) {
+  const profitByMonth = {};
+  data.forEach((item) => {
+    if (item.Country === "France" && (item.Month === "July" || item.Month === "August" || item.Month === "September" || item.Month === "October" || item.Month === "November" || item.Month === "December")) {
+      if (!profitByMonth[item.Month]) {
+        profitByMonth[item.Month] = 0;
+      }
+      profitByMonth[item.Month] += item.Profit;
+    }
+  });
+
+  return {
+    countries: Object.keys(profitByMonth), // Menggunakan bulan sebagai label
+    values: Object.values(profitByMonth),
+  };
+}
+
+function getProfitBySubCategoryFrance(data) {
+  const profitBySubCategory = {};
+  data.forEach((item) => {
+    if (item.Country === "France" && (item.Month === "July" || item.Month === "August" || item.Month === "September" || item.Month === "October" || item.Month === "November" || item.Month === "December")) {
+      if (!profitBySubCategory[item.Sub_Category]) {
+        profitBySubCategory[item.Sub_Category] = 0;
+      }
+      profitBySubCategory[item.Sub_Category] += item.Profit;
+    }
+  });
+
+  return {
+    subCategories: Object.keys(profitBySubCategory),
+    values: Object.values(profitBySubCategory),
   };
 }
 
@@ -250,238 +287,258 @@ window.onload = main;
 
 function getCheckboxValuesMonth() {
   // Get all checkbox elements with the class 'myCheckbox'
-  const checkboxes = document.querySelectorAll('.myCheckboxMonth');
+  const checkboxes = document.querySelectorAll(".myCheckboxMonth");
   const checkedValues = [];
-  
+
   // Iterate over each checkbox
-  checkboxes.forEach(checkbox => {
-      // Check if the checkbox is checked
-      if (checkbox.checked) {
-          // Add the value of the checked checkbox to the array
-          checkedValues.push(checkbox.value);
-      }
+  checkboxes.forEach((checkbox) => {
+    // Check if the checkbox is checked
+    if (checkbox.checked) {
+      // Add the value of the checked checkbox to the array
+      checkedValues.push(checkbox.value);
+    }
   });
 
   // Log and alert the values of the checked checkboxes
-  console.log('Checked values:', checkedValues);
-  alert('Checked values: ' + checkedValues.join(', '));
+  console.log("Checked values:", checkedValues);
+  alert("Checked values: " + checkedValues.join(", "));
 }
 
 function getCheckboxValuesYear() {
   // Get all checkbox elements with the class 'myCheckbox'
-  const checkboxes = document.querySelectorAll('.myCheckboxYear');
+  const checkboxes = document.querySelectorAll(".myCheckboxYear");
   const checkedValues = [];
 
   // Iterate over each checkbox
-  checkboxes.forEach(checkbox => {
-      // Check if the checkbox is checked
-      if (checkbox.checked) {
-          // Add the value of the checked checkbox to the array
-          checkedValues.push(checkbox.value);
-      }
+  checkboxes.forEach((checkbox) => {
+    // Check if the checkbox is checked
+    if (checkbox.checked) {
+      // Add the value of the checked checkbox to the array
+      checkedValues.push(checkbox.value);
+    }
   });
 
   // Log and alert the values of the checked checkboxes
-  console.log('Checked values:', checkedValues);
-  alert('Checked values: ' + checkedValues.join(', '));
+  console.log("Checked values:", checkedValues);
+  alert("Checked values: " + checkedValues.join(", "));
 }
 
-
-
-document
-  .getElementById("toggleDropdownbulan")
-  .addEventListener("click", function () {
-    var dropdownContent = document.getElementById("dropdownbulan");
-    if (dropdownContent.style.display === "none") {
-      dropdownContent.style.display = "block";
-    } else {
-      dropdownContent.style.display = "none";
-    }
-  });
+document.getElementById("toggleDropdownbulan").addEventListener("click", function () {
+  var dropdownContent = document.getElementById("dropdownbulan");
+  if (dropdownContent.style.display === "none") {
+    dropdownContent.style.display = "block";
+  } else {
+    dropdownContent.style.display = "none";
+  }
+});
 
 // dropdown tahun
-document
-  .getElementById("toggleDropdowntahun")
-  .addEventListener("click", function () {
-    var dropdownContent = document.getElementById("dropdowntahun");
-    if (dropdownContent.style.display === "none") {
-      dropdownContent.style.display = "block";
-    } else {
-      dropdownContent.style.display = "none";
-    }
-  });
+document.getElementById("toggleDropdowntahun").addEventListener("click", function () {
+  var dropdownContent = document.getElementById("dropdowntahun");
+  if (dropdownContent.style.display === "none") {
+    dropdownContent.style.display = "block";
+  } else {
+    dropdownContent.style.display = "none";
+  }
+});
 
 // chart js <!-- section profit in eropa -->
 
-
-
-
-function updateValueDisplayTprofit(id,data) {
+function updateValueDisplayTprofit(id, data) {
   id.textContent = 0;
-  let data1 = data / 1000000;  
+  let data1 = data / 1000000;
   const newValue = parseFloat(data1.toFixed(2)) + " M €";
-    
+
   // Perbarui teks di elemen HTML
   id.textContent = newValue;
-
 }
 
-function updateValueDisplayQorder(id,data) {
+function updateValueDisplayQorder(id, data) {
   id.textContent = 0;
-  let data2 = data / 1000000;  
+  let data2 = data / 1000000;
   const newValue = parseFloat(data2.toFixed(2)) + " M";
-    
+
   // Perbarui teks di elemen HTML
   id.textContent = newValue;
-
 }
-
-
 
 function updateTotalProfitChart(profitData) {
-  const chartId = 'TotalProfitChart'
-  const ctx = document.getElementById(chartId).getContext('2d');
-  destroyChart(chartId)
+  const chartId = "TotalProfitChart";
+  const ctx = document.getElementById(chartId).getContext("2d");
+  destroyChart(chartId);
 
   new Chart(ctx, {
-    type: 'bar',
+    type: "bar",
     data: {
       labels: profitData.countries,
-      datasets: [{
-        label: '# Profit',
-        data: profitData.values,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 205, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(201, 203, 207, 0.2)'
-        ],
-        borderColor: [
-          'rgb(255, 99, 132)',
-          'rgb(255, 159, 64)',
-          'rgb(255, 205, 86)',
-          'rgb(75, 192, 192)',
-          'rgb(54, 162, 235)',
-          'rgb(153, 102, 255)',
-          'rgb(201, 203, 207)'
-        ],
-        borderWidth: 1
-      }]
+      datasets: [
+        {
+          label: "# Profit",
+          data: profitData.values,
+          backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+          borderColor: ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+          borderWidth: 1,
+        },
+      ],
     },
     options: {
-      indexAxis: 'y',
+      indexAxis: "y",
       scales: {
         y: {
-          beginAtZero: true
-        }
-      }
-    }
+          beginAtZero: true,
+        },
+      },
+    },
   });
 }
 
 function destroyChart(chartId) {
   let chartStatus = Chart.getChart(chartId);
-    if (chartStatus !== undefined) {
-        chartStatus.destroy()
-    }
+  if (chartStatus !== undefined) {
+    chartStatus.destroy();
+  }
 }
 
 function updateTotalProfitGenderChart(genderData) {
-  const chartId = 'TotalProfitGenderChart'
-  destroyChart(chartId)
+  const chartId = "TotalProfitGenderChart";
+  destroyChart(chartId);
 
-  const ctx = document.getElementById(chartId).getContext('2d');
+  const ctx = document.getElementById(chartId).getContext("2d");
   new Chart(ctx, {
-    type: 'doughnut',
+    type: "doughnut",
     data: {
-      labels: ['M', 'F'],
-      datasets: [{
-        data: genderData,
-        borderWidth: 1
-      }]
-    }
+      labels: ["M", "F"],
+      datasets: [
+        {
+          data: genderData,
+          borderWidth: 1,
+        },
+      ],
+    },
   });
 }
 
 // total profit in eropa grop by age
 function updateTotalProfitAgeChart(ageGroupData) {
-  const chartId = 'TotalProfitAgeChart'
-  const ctx = document.getElementById(chartId).getContext('2d');
-  destroyChart(chartId)
+  const chartId = "TotalProfitAgeChart";
+  const ctx = document.getElementById(chartId).getContext("2d");
+  destroyChart(chartId);
 
   new Chart(ctx, {
-    type: 'bar',
+    type: "bar",
     data: {
       labels: ageGroupData.countries,
-      datasets: [{
-        label: '# Profit',
-        data: ageGroupData.values,
-        backgroundColor: [
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(201, 203, 207, 0.2)'
-        ],
-        borderColor: [
-          'rgb(75, 192, 192)',
-          'rgb(54, 162, 235)',
-          'rgb(153, 102, 255)',
-          'rgb(201, 203, 207)'
-        ],
-        borderWidth: 1
-      }]
+      datasets: [
+        {
+          label: "# Profit",
+          data: ageGroupData.values,
+          backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+          borderColor: ["rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+          borderWidth: 1,
+        },
+      ],
     },
     options: {
       scales: {
         y: {
-          beginAtZero: true
-        }
-      }
-    }
+          beginAtZero: true,
+        },
+      },
+    },
   });
 }
-
-
 
 //
 
 // total profit in eropa grop by categry
 
 function updateTotalProfitProductCategory(ProductCategoryData) {
-  const chartId = 'TotalProfitProductCategory'
-  const ctx = document.getElementById(chartId).getContext('2d');
-  destroyChart(chartId)
+  const chartId = "TotalProfitProductCategory";
+  const ctx = document.getElementById(chartId).getContext("2d");
+  destroyChart(chartId);
 
   new Chart(ctx, {
-    type: 'bar',
+    type: "bar",
     data: {
       labels: ProductCategoryData.countries,
-      datasets: [{
-        label: '# Profit',
-        data: ProductCategoryData.values,
-        backgroundColor: [
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)'
-        ],
-        borderColor: [
-          'rgb(75, 192, 192)',
-          'rgb(54, 162, 235)',
-          'rgb(54, 162, 235)'
-        ],
-        borderWidth: 1
-      }]
+      datasets: [
+        {
+          label: "# Profit",
+          data: ProductCategoryData.values,
+          backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(54, 162, 235, 0.2)"],
+          borderColor: ["rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(54, 162, 235)"],
+          borderWidth: 1,
+        },
+      ],
     },
     options: {
       scales: {
         y: {
-          beginAtZero: true
-        }
-      }
-    }
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+function updateProfitByFrance(profitData) {
+  const chartId = "ProfitByFrance";
+  const ctx = document.getElementById(chartId).getContext("2d");
+  destroyChart(chartId);
+
+  new Chart(ctx, {
+    type: "line", // Ubah tipe chart menjadi line chart
+    data: {
+      labels: profitData.countries, // Hilangkan slice karena kita memerlukan semua bulan
+      datasets: [
+        {
+          label: "Total Profit Q3 & Q4 in France", // Tambahkan label untuk perubahan profit
+          data: profitData.values, // Gunakan data perubahan profit
+          borderColor: "rgba(153, 102, 255, 1)", // Warna garis
+          backgroundColor: "rgba(153, 102, 255, 0.2)", // Warna area bawah garis
+          borderWidth: 1,
+          fill: false,
+          lineTension: 0.1,
+        },
+      ],
+    },
+    options: {
+      // Ganti tanda '=' dengan ':'
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+function updateProfitBySubCategoryFrance(profitData) {
+  const chartId = "ProfitBySubCategoryFrance";
+  const ctx = document.getElementById(chartId).getContext("2d");
+  destroyChart(chartId);
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: profitData.subCategories, // Menggunakan sub-kategori sebagai label
+      datasets: [
+        {
+          label: "Total Profit by Sub Category Q3 & Q4 in France",
+          data: profitData.values,
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
   });
 }
 
