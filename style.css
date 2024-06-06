@@ -1,5 +1,7 @@
 /*  */
 
+
+
 /* Gaya dasar untuk navbar */
 .navbar {
     background-color: #15417a;
@@ -24,6 +26,7 @@
     align-self: flex-start;
     padding: 5px;
     justify-content: flex-start;
+    
 }
 .nav-logo {
     flex: 1;
@@ -36,7 +39,7 @@
 .nav-title {
     color: white;
     /* background-color: #abb2bc; */
-    font-size: large;
+    font-size: larger;
     flex: 1;
     text-align: center;
     padding: 5px;
@@ -50,8 +53,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    font-size: 1rem;
 }
 
+.nav-total h5 {
+    font-weight: 800;
+  }
 
 .nav-dropdown {
     /* background-color: rgb(149, 149, 175); */
@@ -62,12 +69,60 @@
     align-items: center;
 }
 
+.filterdrop {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  #toggleDropdownbulan,
+  #toggleDropdowntahun {
+    background-color: rgb(212, 209, 209);
+    padding: 0.5rem 5rem;
+  }
+  #dropdownbulan {
+    position: absolute;
+    color: black;
+    background-color: rgb(212, 209, 209);
+    min-width: 330px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    margin-top: 2.7rem;
+    z-index: 1;
+  }
+  
+  #dropdowntahun {
+    position: absolute;
+    color: black;
+    background-color: rgb(212, 209, 209);
+    min-width: 330px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    margin-top: 5rem;
+    z-index: 1;
+  }
+  
+  #dropdownbulan label,
+  #dropdowntahun label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #dropdownbulan label span,
+  #dropdowntahun label span {
+    font-size: 0.7rem;
+    color: rgb(43, 40, 40);
+  }
+
+
+
 .total-item {
     flex: 1;
     background-color: rgb(212, 209, 209);
     text-align: center;
     border: 1px solid #15417a;
-    margin: 20px;
+    margin: 15px;
+    border-radius: 0.8rem;
 }
 
 /* Media query untuk layar tablet */
@@ -109,14 +164,16 @@
   padding: 10px;
   grid-template-columns: repeat(6, 1fr);
   background-color: rgb(212, 209, 209);
-  height: 70vh;
+  height: auto;
 }
 
 .grid-item {
   color: black;
   border: 1px solid #15417a;
   text-align: center;
-  background-color: rgb(217, 214, 214)
+  background-color: rgb(217, 214, 214);
+  align-items: center;
+  
 }
 
 
