@@ -549,7 +549,6 @@ function updateValueProfitLowestCountry(id, data) {
   const val = data / 1000000;
   id.textContent = val.toFixed(2) + " M €";
 }
-
 function updateTotalProfitChart(profitData) {
   const chartId = "TotalProfitChart";
   const ctx = document.getElementById(chartId).getContext("2d");
@@ -564,8 +563,8 @@ function updateTotalProfitChart(profitData) {
         {
           label: "# Profit",
           data: profitData.values,
-          backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
-          borderColor: ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+          backgroundColor: ["rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)"],
+          borderColor: ["rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)"],
           borderWidth: 1,
         },
       ],
@@ -595,8 +594,8 @@ function updateTotalProfitAgeChart(ageGroupData) {
         {
           label: "# Profit",
           data: ageGroupData.values,
-          backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
-          borderColor: ["rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+          backgroundColor: ["rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)"],
+          borderColor: ["rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)"],
           borderWidth: 1,
         },
       ],
@@ -611,6 +610,7 @@ function updateTotalProfitAgeChart(ageGroupData) {
     },
   });
 }
+
 function updateTotalProfitGenderChart(genderData) {
   const chartId = "TotalProfitGenderChart";
   destroyChart(chartId);
@@ -623,6 +623,7 @@ function updateTotalProfitGenderChart(genderData) {
       labels: ["M", "F"],
       datasets: [
         {
+          backgroundColor: ["rgb(34,73,171)", "rgb(171,27,1)"],
           data: genderData,
           borderWidth: 1,
         },
@@ -633,6 +634,7 @@ function updateTotalProfitGenderChart(genderData) {
     },
   });
 }
+
 function updateTotalProfitProductCategory(ProductCategoryData) {
   const chartId = "TotalProfitProductCategory";
   const ctx = document.getElementById(chartId).getContext("2d");
@@ -646,8 +648,8 @@ function updateTotalProfitProductCategory(ProductCategoryData) {
         {
           label: "# Profit",
           data: ProductCategoryData.values,
-          backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(54, 162, 235, 0.2)"],
-          borderColor: ["rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(54, 162, 235)"],
+          backgroundColor: ["rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)"],
+          borderColor: ["rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)"],
           borderWidth: 1,
         },
       ],
@@ -673,12 +675,12 @@ function updateProfitByFrance(profitData) {
     type: "line",
     aspectRatio: 2.1, // Ubah tipe chart menjadi line chart
     data: {
-      labels: profitData.countries, // Hilangkan slice karena kita memerlukan semua bulan
+      labels: profitData.countries, 
       datasets: [
         {
-          label: "Total Profit Q3 & Q4 in France", // Tambahkan label untuk perubahan profit
+          label: "Total Profit Q3 & Q4 in France",
           data: profitData.values, // Gunakan data perubahan profit
-          borderColor: "rgba(153, 102, 255, 1)", // Warna garis
+          borderColor: "rgb(139, 5, 0)", // Warna garis
           backgroundColor: "rgba(153, 102, 255, 0.2)", // Warna area bawah garis
           borderWidth: 1,
           fill: false,
@@ -696,120 +698,55 @@ function updateProfitByFrance(profitData) {
     },
   });
 }
-// function updateProfitBySubCategoryFrance(SubCategoryFranceData) {
-//   const chartId = "ProfitBySubCategoryFrance";
-//   const ctx = document.getElementById(chartId).getContext("2d");
-//   destroyChart(chartId);
 
-//   new Chart(ctx, {
-//     type: "bar",
-//     data: {
-//       labels: SubCategoryFranceData.countries,
-//       datasets: [
-//         {
-//           label: "# Profit",
-//           data: SubCategoryFranceData.values,
-//           backgroundColor: [
-//             "rgba(75, 192, 192, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//           ],
-//           borderColor: [
-//             "rgb(75, 192, 192)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//             "rgb(54, 162, 235)",
-//           ],
-//           borderWidth: 1,
-//         },
-//       ],
-//     },
-//     options: {
-//       aspectRatio: 2.3,
-//       scales: {
-//         y: {
-//           beginAtZero: true,
-//         },
-//       },
-//     },
-//   });
-// }
 
 function updateProfitBySubCategoryFrance(SubCategoryFranceData) {
   const chartId = "ProfitBySubCategoryFrance";
   const ctx = document.getElementById(chartId).getContext("2d");
   destroyChart(chartId);
 
-  const subCategories = SubCategoryFranceData.categories;
   const datasets = SubCategoryFranceData.dataset.map((data, index) => ({
     label: data.label,
     data: data.data,
-    backgroundColor: getColor(index),
-    borderColor: getColor(index),
+    backgroundColor: getBrightColors(index), // Menggunakan warna yang lebih terang
+    borderColor: getBrightColors(index), // Menggunakan warna yang lebih terang
     borderWidth: 1,
   }));
-
-  const groupedSubCategoryLabels = ["Helmets", "Tires and Tubes", "Road Bikes", "Touring Bikes","Jerseys","Bottles and Cages","Hydration Packs","Shorts","Gloves","Mountain Bikes","Fenders","Vests","Bike Racks","Bike Stands","Caps","Cleaners","Socks"];
-  const reversedDatasets = datasets.reverse(); // Balik urutan dataset secara keseluruhan
 
   new Chart(ctx, {
     type: "bar",
     data: {
-      labels: groupedSubCategoryLabels,
-      datasets: reversedDatasets,
+      labels: SubCategoryFranceData.subCategories,
+      datasets: datasets,
     },
     options: {
-      aspectRatio: 2.5,
+      aspectRatio: 2.3,
       scales: {
         y: {
           beginAtZero: true,
         },
-        y: {
-          ticks: {
-            maxRotation: 5,
-            minRotation: 0,
-            autoSkip: false,
-          },
-        },
       },
     },
-    plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        callbacks: {
-          label: function (context) {
-            return `${context.dataset.label}: ${context.raw}`;
-          },
-        },
-      },
-    },
-    responsive: true,
-    maintainAspectRatio: false,
   });
 }
+
+// Fungsi untuk mendapatkan warna yang lebih terang
+function getBrightColors(index) {
+  const colors = [
+    'rgb(21,101,192)', // Merah
+    'rgb(158,42,43)', // Biru
+    'rgb(255,179,0)', // Kuning
+    
+  ];
+
+  // Jika index melebihi jumlah warna, gunakan warna default (abu-abu)
+  if (index >= colors.length) {
+    return 'rgba(199, 199, 199, 0.6)';
+  }
+
+  return colors[index];
+}
+
 
 function updateProfitByProductCategoryinFrance(ProductCategoryinFranceData) {
   const chartId = "ProfitByProductCategoryinFrance";
@@ -824,8 +761,8 @@ function updateProfitByProductCategoryinFrance(ProductCategoryinFranceData) {
         {
           label: "# Profit",
           data: ProductCategoryinFranceData.values,
-          backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 99, 132, 0.2)"],
-          borderColor: ["rgb(255, 99, 132)", "rgb(255, 99, 132)", "rgb(255, 99, 132)"],
+          backgroundColor: ["rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)"],
+          borderColor: ["rgb(21,65,122)", "rgb(21,65,122)", "rgb(21,65,122)"],
           borderWidth: 1,
         },
       ],
@@ -841,21 +778,66 @@ function updateProfitByProductCategoryinFrance(ProductCategoryinFranceData) {
   });
 }
 
+function updateProfitCustomerGenderByProductCategory(profitData) {
+  const chartId = "ProfitCustomerGenderByProductCategory";
+  const ctx = document.getElementById(chartId).getContext("2d");
+  destroyChart(chartId);
+
+  const datasets = profitData.dataset.map((data, index) => ({
+    label: data.label,
+    data: data.data,
+    backgroundColor: getBrightColorg(index), // Menggunakan warna yang lebih terang
+    borderColor: getBrightColor(index), // Menggunakan warna yang lebih terang
+    borderWidth: 1,
+  }));
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: profitData.categories,
+      datasets: datasets,
+    },
+    options: {
+      aspectRatio: 2.3,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+// Fungsi untuk mendapatkan warna yang lebih terang
+function getBrightColorg(index) {
+  const colors = [
+    'rgb(34,73,171)', // Merah
+    'rgb(244,67,54)', // Biru
+  ];
+
+  // Jika index melebihi jumlah warna, gunakan warna default (abu-abu)
+  if (index >= colors.length) {
+    return 'rgba(199, 199, 199, 0.6)';
+  }
+
+  return colors[index];
+}
+
 function updateProfitAgeGroupByProductCategory(profitData) {
   const chartId = "ProfitAgeGroupByProductCategory";
   const ctx = document.getElementById(chartId).getContext("2d");
   destroyChart(chartId);
 
-  const ageGroups = profitData.categories;
+  const ageGroups = profitData.ageGroups;
   const datasets = profitData.dataset.map((data, index) => ({
     label: data.label,
     data: data.data,
-    backgroundColor: getColor(index),
-    borderColor: getColor(index),
+    backgroundColor: getBrightColor(index), // Menggunakan warna yang lebih terang
+    borderColor: getBrightColor(index), // Menggunakan warna yang lebih terang
     borderWidth: 1,
   }));
 
-  const groupedAgeLabels = ["Youth (<25)", "Young Adults (25-34)", "Adults (35-64)", "Seniors (64+)"];
+  const groupedAgeLabels = ["Seniors (64+)", "Youth (<25)", "Young Adults (25-34)", "Adults (35-64)"];
   const reversedDatasets = datasets.reverse(); // Balik urutan dataset secara keseluruhan
 
   new Chart(ctx, {
@@ -874,24 +856,17 @@ function updateProfitAgeGroupByProductCategory(profitData) {
   });
 }
 
-function updateProfitCustomerGenderByProductCategory(profitData) {
-  const chartId = "ProfitCustomerGenderByProductCategory";
-  const ctx = document.getElementById(chartId).getContext("2d");
-  destroyChart(chartId);
+// Fungsi untuk mendapatkan warna yang lebih terang
+function getBrightColor(index) {
+  const colors = [
+    'rgb(244,67,54)', // Merah
+    'rgb(30,136,229)', // Biru
+    'rgb(255,193,7)', // Kuning// Hitam
+  ];
 
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: profitData.categories,
-      datasets: profitData.dataset,
-    },
-    options: {
-      aspectRatio: 2.3,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
+  if (index >= colors.length) {
+    return 'rgba(0, 0, 0, 0.6)';
+  }
+
+  return colors[index];
 }

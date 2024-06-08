@@ -1,127 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>BikeSales</title>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-title-container">
-            <div class="nav-logo">
-                <img src="logorevoU.png" alt="" title="kuda poni" width="200">
-            </div>
-            <div class="nav-title">
-                <h1>Bike Sales Data Dashboard</h1>
-            </div>
-            <div class="nav-tim">
-                <p>Team 6-Medan</p>
-            </div>
-        </div>
-        <div class="nav-option-container">
-            <div class="nav-total">
-                <div class="total-item">
-                <h5>Total profit</h5>
-                <p id="displayTprofit"></p>
-                </div>
-                <div class="total-item">
-                <h5>Order_Quantity</h5>
-                <p id="displayOquantity"></p>
-                </div>
-                <div class="total-item">
-                <h5>Profit lowest country</h5>
-                <p id="displayLcountry"></p>
-                </div>
-            </div>
-            <div class="nav-dropdown">
-                <div class="filterdrop">
-                    <button id="toggleDropdownbulan">Pilih Bulan</button>
-                    <div id="dropdownbulan" style="display: none">
-                      <label
-                        ><input type="checkbox" checked class="myCheckboxMonth" name="bulan" value="July" onchange="handleOnMonthFilter(this)"/> July
-                        <span>120,9K</span></label><br />
-                      <label
-                        ><input type="checkbox" checked class="myCheckboxMonth" name="bulan" value="August" onchange="handleOnMonthFilter(this)"/> Agustus
-                        <span>132,2K</span></label><br />
-                      <label
-                        ><input type="checkbox" checked class="myCheckboxMonth" name="bulan" value="September" onchange="handleOnMonthFilter(this)"/> September
-                        <span>139,3K</span></label><br />
-                      <label
-                        ><input type="checkbox" checked class="myCheckboxMonth" name="bulan" value="October" onchange="handleOnMonthFilter(this)"/> Oktober
-                        <span>107,9K</span></label><br />
-                      <label
-                        ><input type="checkbox" checked class="myCheckboxMonth" name="bulan" value="November" onchange="handleOnMonthFilter(this)"/> November
-                        <span>126,4K</span></label><br />
-                      <label
-                        ><input type="checkbox" checked class="myCheckboxMonth" name="bulan" value="December" onchange="handleOnMonthFilter(this)"/> Desember
-                        <span>215,3K</span></label><br />
-                      <!-- Tambahkan opsi lain di sini sesuai kebutuhan -->
-                    </div>
-                    <button id="toggleDropdowntahun">Pilih Tahun</button>
-                    <div id="dropdowntahun" style="display: none">
-                      <label
-                        ><input type="checkbox" checked class="myCheckboxYear" name="bulan" value="2013" onchange="handleOnYearFilter(this)"/> 2013
-                        <span>496,6K</span></label
-                      ><br />
-                      <label><input type="checkbox" checked class="myCheckboxYear" name="bulan" value="2014" onchange="handleOnYearFilter(this)"/> 2014
-                        <span>566,7K</span></label><br />
-                      <label
-                        ><input type="checkbox" checked class="myCheckboxYear" name="bulan" value="2015" onchange="handleOnYearFilter(this)"/> 2015
-                        <span>450,7K</span></label><br />
-                      <label><input type="checkbox" checked class="myCheckboxYear" name="bulan" value="2016" onchange="handleOnYearFilter(this)"/> 2016
-                        <span>531,2K</span>
-                      </label>
-                    </div>
-                  </div>
-            </div>
-        </div>
-    </nav>
-    <div class="grid-container">
-        <div class="grid-item col-6">
-            <p>Total Profit by Countries</p>
-            <canvas id="TotalProfitChart"></canvas>
-        </div>
-        <div class="grid-item col-2 col-s-6">
-        <p>Total Profit by Age Group</p>
-        <canvas id="TotalProfitAgeChart"></canvas>
-        </div>
-        <div class="grid-item col-2 col-s-6">
-            <p>Total Profit by Customer Gender</p> 
-            <canvas id="TotalProfitGenderChart"></canvas>
-        </div>  
-        <div class="grid-item col-2 col-s-6">
-            <p>Total Profit by Produk Category</p>
-            <canvas id="TotalProfitProductCategory"></canvas>
-        </div>
-        <div class="grid-item col-3 col-s-6">
-            <p>Total Profit Q3 & Q4 in France </p>
-            <canvas id="ProfitByFrance"></canvas>
-        </div>
-        <div class="grid-item col-3 col-s-6">
-            <p>Total Profit by Sub Category Q3 & Q4 in France</p>
-            <canvas id="ProfitBySubCategoryFrance"></canvas>
-        </div>
-        <div class="grid-item col-2 col-s-6">
-            <p>Profit Age_Group by Product Category Q3 & Q4 in France</p>
-            <canvas id="ProfitAgeGroupByProductCategory"></canvas>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Datang | Capstone Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="bener">
+      <img src="logorevoU.png" alt="" />
+      <h1><span></span></h1>
+      <p>Bike Sales Data Dasbhoard</p>
+      <a href="dashboard.html"><button>Selengkapnya</button></a>
+    </div>
+
+    <div class="box-team6">
+      <h1>Team Captain</h1>
+
+      <div class="team-section">
+        <div class="team-captain">
+          <div class="box">
+            <img src="img/laty3.jpg" alt="Team Captain" />
+            <h3>Siti Nur Latifah</h3>
+            <p>Universitas Airlangga</p>
           </div>
-        <div class="grid-item col-2 col-s-6">
-            <p>Total Profit by Produk Category Q3 & Q4 in France</p>
-            <canvas id="ProfitByProductCategoryinFrance"></canvas>
-          </div>  
-        <div class="grid-item col-2 col-s-6">
-            <p>Total Profit Customer Gender by Product Category Q3 & Q4 in France</p>
-            <canvas id="ProfitCustomerGenderByProductCategory"></canvas>
-          </div>
-      </div> 
+        </div>
       </div>
 
+      <div class="team-section">
+        <h2>Front End Engineers</h2>
+        <div class="box-container">
+          <div class="box">
+            <img src="img/akbar.jpg" alt="Team Member" />
+            <h3>Akbar Pratama</h3>
+            <p>Universitas Amikom Yogyakarta</p>
+          </div>
+          <div class="box">
+            <img src="img/Tri.jpg" alt="Team Member" />
+            <h3>Tri Alfianto</h3>
+            <p>Universitas Diponegoro</p>
+          </div>
+          <div class="box">
+            <img src="img/Dion jpg.jpg" alt="Team Member" />
+            <h3>Dionisia Destikarniaman Gulo</h3>
+            <p>Universitas Atma Jaya Yogyakarta</p>
+          </div>
+          <div class="box">
+            <img src="img/raffi.jpg" alt="Team Member" />
+            <h3>Muhamad Thirafi Qaedi Setiawan</h3>
+            <p>Universitas Muhammadiyah Jakarta</p>
+          </div>
 
-      
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script src="script.js"></script>     
-    </body>
-</body>
+          <div class="box">
+            <img src="img/Teguh.jpg" alt="Team Member" />
+            <h3>Teguh Setiadi</h3>
+            <p>STMIK Jayakarta</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-section">
+        <h2>Deployment Team</h2>
+        <div class="box-container">
+          <div class="box">
+            <img src="img/Nurul.jpg" alt="Team Member" />
+            <h3>Nurul Aini Lessy</h3>
+            <p>Universitas Negeri Semarang</p>
+          </div>
+          <div class="box">
+            <img src="img/Roy.jpg" alt="Team Member" />
+            <h3>Roy Afrizon Asril</h3>
+            <p>Universitas Pembangunan Nasional "Veteran" Yogyakarta</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-section">
+        <h2>Quality Assurance</h2>
+        <div class="box-container">
+          <div class="box">
+            <img src="img/Salman.jpg" alt="Team Member" />
+            <h3>Salman</h3>
+            <p>Universitas Indonesia</p>
+          </div>
+          <div class="box">
+            <img src="img/anggi.jpg" alt="Team Member" />
+            <h3>Anggi Putri Nur Aulia</h3>
+            <p>Universitas Jember</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-section">
+        <h2>Pitch Deck Team</h2>
+        <div class="box-container">
+          <div class="box">
+            <img src="img/Vania.jpg" alt="Team Member" />
+            <h3>Vania Shira Marella</h3>
+            <p>Universitas Airlangga</p>
+          </div>
+          <div class="box">
+            <img src="img/Azifa.jpg" alt="Team Member" />
+            <h3>Azhifa Aisyasalbil</h3>
+            <p>Universitas Merdeka Malang</p>
+          </div>
+          <div class="box">
+            <img src="img/Yuni2.jpg" alt="Team Member" />
+            <h3>Yuni Rahmawati</h3>
+            <p>Universitas Indraprasta PGRI</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
