@@ -1,7 +1,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Kampus-Merdeka-Software-Engineering/km-feb24-medan-6">
-    <img src="Capstone/logorevoU.png" width='250dp' alt="Logo" >
+    <img src="logorevoU.png" width='250dp' alt="Logo" >
   </a>
 
   <h1 align="center">SE Capstone Project RevoU KM</h1>
