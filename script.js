@@ -5,6 +5,8 @@ const valueProfitDisplay = document.getElementById("displayTprofit");
 const valueOrderQuantityDisplay = document.getElementById("displayOquantity");
 const lowestCountryDisplay = document.getElementById("displayLcountry");
 
+let MAX_PROFIT_BY_COUNTRY = 0
+
 async function handleOnMonthFilter(element) {
   const allData = await loadAllJSON();
   const franceData = await loadFranceJSON();
@@ -102,7 +104,6 @@ function filterDataBySelectedFilters(data) {
 
 function updateFilter(element, currentFilters) {
   let filterValue = element.value;
-  console.log(currentFilters);
   if (!element.checked) {
     return currentFilters.filter((item) => item !== filterValue);
   } else {
@@ -138,6 +139,11 @@ async function main() {
     const valueProfitLowestCountry = getValueProfitLowestCountry(data1);
     const profitbyAgeGroup = getProfitbyAgeGroup(data1);
     const profitbyProductCategory = getProfitProductCategory(data1);
+
+    const max_temp = Math.max(...profitByCountry.values)
+    if (max_temp > MAX_PROFIT_BY_COUNTRY) {
+      MAX_PROFIT_BY_COUNTRY = Math.ceil(max_temp/100000)*100000
+    }
 
     // Update the charts with the transformed data
     updateTotalProfitChart(profitByCountry);
@@ -294,30 +300,37 @@ function getProfitByFrance(data) {
 //   };
 // }
 function  getProfitBySubCategoryFrance(data) {
-  const profitBySubCategoryFrance = {};
+  const filteredMonth = ["July", "August", "September", "October", "November", "December"]
+  const groupedAndSortedData = data.reduce((acc, item) => {
+    const {Product_Category, Sub_Category, Profit} = item;
+    const key = Product_Category + '-' + Sub_Category;
 
-  data.forEach((item) => {
-    if (item.Country === "France" && ["July", "August", "September", "October", "November", "December"].includes(item.Month)) {
-      const subCategory = item.Sub_Category;
-      const category = item.Product_Category;
+    if (item["Country"] === "France" && filteredMonth.includes(item.Month)) {
+      if (!acc[key]) {
+        acc[key] = {Product_Category, Sub_Category, Profit: 0};
+      }
 
-      if (!profitBySubCategoryFrance[category]) {
-        profitBySubCategoryFrance[category] = {};
-      }
-      if (!profitBySubCategoryFrance[category][subCategory]) {
-        profitBySubCategoryFrance[category][subCategory] = 0;
-      }
-      profitBySubCategoryFrance[category][subCategory] += item.Profit;
+      acc[key].Profit += Profit;
     }
-  });
+    return acc;
+  }, {});
 
-  const categories = Object.keys(profitBySubCategoryFrance);
-  const subCategories = [...new Set(data.map((item) => item.Sub_Category))];
+  const sortedData = Object.values(groupedAndSortedData).sort((a, b) => b.Profit - a.Profit);
+
+  const subCategories = [...new Set(sortedData.map((item) => item.Sub_Category))];
+  const categories = [...new Set(sortedData.map((item) => item.Product_Category))];
+
+  //       data: subCategories.map((subCategory) => profitBySubCategoryFrance[category][subCategory] || 0),
   const dataset = categories.map((category, index) => {
     const color = getColor(index);
     return {
       label: category,
-      data: subCategories.map((subCategory) => profitBySubCategoryFrance[category][subCategory] || 0),
+      data: sortedData.map(item => {
+        if (item["Product_Category"] === category) {
+          return item["Profit"]
+        }
+        return 0
+      }),
       backgroundColor: color,
       borderColor: color,
       borderWidth: 1,
@@ -344,6 +357,7 @@ function getProfitProductCategoryInFrance(data) {
     values: Object.values(profitbyProductCategoryinFrance),
   };
 }
+
 
 function getProfitAgeGroupByProductCategory(data) {
   const profitByAgeGroupAndCategory = {};
@@ -556,7 +570,6 @@ function updateTotalProfitChart(profitData) {
 
   new Chart(ctx, {
     type: "bar",
-    aspectRatio: 0.1,
     data: {
       labels: profitData.countries,
       datasets: [
@@ -571,11 +584,14 @@ function updateTotalProfitChart(profitData) {
     },
     options: {
       indexAxis: "y",
-      aspectRatio: 4.3,
+      aspectRatio: 3.2,
       scales: {
         y: {
           beginAtZero: true,
         },
+        x: {
+          max: MAX_PROFIT_BY_COUNTRY,
+        }
       },
     },
   });
